@@ -1,9 +1,9 @@
 import * as R from 'ramda';
 import * as THREE from 'three';
 import wallTexture from '../img/kilimanjaro.jpg';
-import {Hole, Block, WallSettings} from './interfaces';
+import {Hole, Block, WallSettings, CanvasPreview} from './interfaces';
 import createBlock from './create_block';
-import {createCanvasPreview} from './canvas_preview';
+import createCanvasPreview from './canvas_preview';
 
 const generateUVs = (geom:THREE.Geometry) => {
   geom.computeBoundingBox();
@@ -63,14 +63,14 @@ const isWall = (block:Block, holes:Array<Hole>) => {
   return r === 0;
 };
 
-const update = (geom: THREE.Geometry, settings: WallSettings) => {
+const update = (geom: THREE.Geometry, settings: WallSettings, preview: CanvasPreview) => {
   geom.vertices = [];
   geom.faces = [];
   // console.log(settings);
   const {
-    wallWidth,
-    wallHeight,
-    wallThickness,
+    width,
+    height,
+    thickness,
     holes,
   } = settings;
 
@@ -82,7 +82,7 @@ const update = (geom: THREE.Geometry, settings: WallSettings) => {
   });
   rasterX.sort((a, b) => a - b);
   rasterX = R.uniq(rasterX);
-  rasterX.push(wallWidth);
+  rasterX.push(width);
 
   holes.sort(sortOnY);
   let rasterY:Array<number> = [];
@@ -92,7 +92,7 @@ const update = (geom: THREE.Geometry, settings: WallSettings) => {
   });
   rasterY.sort((a, b) => a - b);
   rasterY = R.uniq(rasterY);
-  rasterY.push(wallHeight);
+  rasterY.push(height);
 
   // console.log(rasterX);
   // console.log(rasterY);
@@ -101,7 +101,6 @@ const update = (geom: THREE.Geometry, settings: WallSettings) => {
   let refX = 0;
   rasterX.forEach((lineX) => {
     let refY = 0;
-    console.log(refX);
     rasterY.forEach((lineY) => {
       const block:Block = {
         x: refX,
@@ -112,7 +111,6 @@ const update = (geom: THREE.Geometry, settings: WallSettings) => {
         height: lineY - refY,
       };
       blocks.push(block);
-      console.log('   ', refY);
       refY = lineY;
     });
     refX = lineX;
@@ -126,14 +124,14 @@ const update = (geom: THREE.Geometry, settings: WallSettings) => {
         z: 0,
         width: block.width,
         height: block.height,
-        depth: wallThickness,
+        depth: thickness,
       });
     }
   });
 
-  createCanvasPreview(settings, blocks);
+  preview.update(holes, blocks);
 
-  // geom.mergeVertices();
+  geom.mergeVertices();
   geom.verticesNeedUpdate = true;
   geom.uvsNeedUpdate = true;
   geom.normalsNeedUpdate = true;
@@ -144,9 +142,9 @@ const update = (geom: THREE.Geometry, settings: WallSettings) => {
 }
 
 export const defaultSettings = {
-  wallWidth: 500,
-  wallHeight: 350,
-  wallThickness: 30,
+  width: 500,
+  height: 350,
+  thickness: 30,
   holes: [
     {
       id: 1,
@@ -185,7 +183,8 @@ export const createWall = (settings: WallSettings = defaultSettings) => {
   // material.map.minFilter = THREE.LinearFilter;
 
   const geom = new THREE.Geometry();
-  update(geom, settings);
+  const preview = createCanvasPreview(settings);
+  update(geom, settings, preview);
 
   const wall = new THREE.Mesh(geom, material);
   wall.castShadow = true;
@@ -193,7 +192,7 @@ export const createWall = (settings: WallSettings = defaultSettings) => {
   return {
     mesh: wall,
     update: (data:WallSettings) => {
-      update(geom, data);
+      update(geom, data, preview);
     },
   }
 };

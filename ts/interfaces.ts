@@ -25,8 +25,12 @@ export interface Block {
 };
 
 export interface WallSettings {
-  wallWidth: number,
-  wallHeight: number,
-  wallThickness: number,
+  width: number,
+  height: number,
+  thickness: number,
   holes: Array<Hole>,
 };
+
+export interface CanvasPreview {
+  update: Function
+}
