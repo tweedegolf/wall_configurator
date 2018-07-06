@@ -1,9 +1,6 @@
 import {Hole, Block, WallSettings} from './interfaces';
 
 const update = (ctx:CanvasRenderingContext2D, settings:WallSettings, blocks:Array<Block>) => {
-  // ctx.scale(-1, 1);
-  // ctx.setTransform(1, 0, 0, 1, 0, 0);
-
   const holes = settings.holes;
   holes.forEach((hole) => {
     ctx.beginPath();
@@ -21,9 +18,6 @@ const update = (ctx:CanvasRenderingContext2D, settings:WallSettings, blocks:Arra
     ctx.rect(block.x, block.y, block.width, block.height);
     ctx.stroke();
   });
-
-  // ctx.scale(1, -1);
-  ctx.setTransform(1, 0, 0, 1, 0, 0);
 };
 
 
@@ -40,6 +34,7 @@ const createCanvasPreview = (settings:WallSettings, blocks:Array<Block>) => {
       const element = document.getElementById('preview');
       if (element instanceof HTMLElement) {
         element.style.height = `${settings.wallHeight}px`;
+        element.style.transform = `scale(1, -1)`;
         element.appendChild(canvas);
       }
     }
