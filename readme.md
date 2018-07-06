@@ -1,3 +1,3 @@
 ### custom geo
 
-[Live demo](httos://abumarkub.net/custom_geo/)
+[Live demo](https://abumarkub.net/custom_geo/)
