@@ -1,0 +1,27 @@
+{
+  "dependencies": {
+    "dat.gui": "^0.7.2",
+    "img": "^3.0.3",
+    "ramda": "^0.25.0",
+    "three": "^0.94.0",
+    "three-orbit-controls": "^82.1.0"
+  },
+  "devDependencies": {
+    "@types/dat.gui": "^0.7.0",
+    "@types/node": "^10.5.1",
+    "@types/ramda": "^0.25.34",
+    "@types/three": "^0.92.11",
+    "node-sass": "^4.9.0",
+    "parcel-bundler": "^1.9.4",
+    "typescript": "^2.9.2"
+  },
+  "scripts": {
+    "server": "python -m SimpleHTTPServer 1234",
+    "build": "parcel build index.html -d build --public-url ./",
+    "watch": "parcel"
+  },
+  "name": "custom_geo",
+  "version": "1.0.0",
+  "main": "main.ts",
+  "license": "MIT"
+}
