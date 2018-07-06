@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import OrbitControls from '../lib/OrbitControls';
-import {createWall, defaultSettings, WallSettings} from './wall';
+import {createWall, defaultSettings} from './wall';
+import {WallSettings} from './interfaces';
 import createDatGUIControls from './dat-gui';
 const scene = new THREE.Scene();
 
@@ -53,8 +54,11 @@ scene.add(wall.mesh);
 //   render();
 // });
 
-document.body.appendChild(renderer.domElement);
-window.addEventListener('resize', resize);
-resize();
-render();
+const element = document.getElementById('threejs');
+if (element instanceof HTMLElement) {
+  document.body.appendChild(renderer.domElement);
+  window.addEventListener('resize', resize);
+  resize();
+  render();
+}
 

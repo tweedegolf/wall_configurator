@@ -1,50 +1,9 @@
 import * as R from 'ramda';
 import * as THREE from 'three';
 import wallTexture from '../img/kilimanjaro.jpg';
-
-const canvas:(HTMLElement | null) = document.getElementById('tmp');
-let ctx:(CanvasRenderingContext2D | null) = null;
-if(canvas instanceof HTMLCanvasElement) {
-  ctx = canvas.getContext('2d');
-}
-
-if(ctx instanceof CanvasRenderingContext2D) {
-  // ctx.scale(-1, 1);
-  // ctx.setTransform(1, 0, 0, 1, 0, 0);
-}
-
-interface PaneSettings {
-  x:number,
-  y:number,
-  z:number,
-  width:number,
-  height:number,
-  depth:number,
-};
-
-interface Hole {
-  x: number,
-  y: number,
-  width: number,
-  height: number,
-  id: number,
-};
-
-interface Block {
-  x: number,
-  x2: number,
-  y: number,
-  y2: number,
-  width: number,
-  height: number,
-};
-
-export interface WallSettings {
-  wallWidth: number,
-  wallHeight: number,
-  wallThickness: number,
-  holes: Array<Hole>,
-};
+import {Hole, Block, WallSettings} from './interfaces';
+import createBlock from './create_block';
+import {createCanvasPreview} from './canvas_preview';
 
 const generateUVs = (geom:THREE.Geometry) => {
   geom.computeBoundingBox();
@@ -68,99 +27,7 @@ const generateUVs = (geom:THREE.Geometry) => {
       new THREE.Vector2((v3.x + offset.x)/range.x ,(v3.y + offset.y)/range.y)
     ]);
   }
-  // geom.uvsNeedUpdate = true;
 };
-
-
-const createBlock = (geom:THREE.Geometry, settings: PaneSettings) => {
-  const {
-    x,
-    y,
-    z,
-    width,
-    height,
-    depth
-  } = settings;
-
-  // front
-  let index = geom.vertices.length;
-  geom.vertices.push(
-    new THREE.Vector3(x, y, z),
-    new THREE.Vector3(x, y + height, z),
-    new THREE.Vector3(x + width, y + height, z),
-    new THREE.Vector3(x + width, y, z),
-  );
-  geom.faces.push(
-    new THREE.Face3(index, index + 1, index + 2),
-    new THREE.Face3(index + 2, index + 3, index)
-  );
-
-  // back
-  index = geom.vertices.length;
-  geom.vertices.push(
-    new THREE.Vector3(x, y, z + depth),
-    new THREE.Vector3(x, y + height, z + depth),
-    new THREE.Vector3(x + width, y + height, z + depth),
-    new THREE.Vector3(x + width, y, z + depth),
-  );
-  geom.faces.push(
-    new THREE.Face3(index, index + 1, index + 2),
-    new THREE.Face3(index + 2, index + 3, index)
-  );
-
-  //top
-  index = geom.vertices.length;
-  geom.vertices.push(
-    new THREE.Vector3(x, y + height, z),
-    new THREE.Vector3(x, y + height, z + depth),
-    new THREE.Vector3(x + width, y + height, z + depth),
-    new THREE.Vector3(x + width, y + height, z),
-  );
-  geom.faces.push(
-    new THREE.Face3(index, index + 1, index + 2),
-    new THREE.Face3(index + 2, index + 3, index)
-  );
-
-  // bottom
-  index = geom.vertices.length;
-  geom.vertices.push(
-    new THREE.Vector3(x, y, z),
-    new THREE.Vector3(x, y, z + depth),
-    new THREE.Vector3(x + width, y, z + depth),
-    new THREE.Vector3(x + width, y, z),
-  );
-  geom.faces.push(
-    new THREE.Face3(index, index + 1, index + 2),
-    new THREE.Face3(index + 2, index + 3, index)
-  );
-
-  // left
-  index = geom.vertices.length;
-  geom.vertices.push(
-    new THREE.Vector3(x, y, z),
-    new THREE.Vector3(x, y, z + depth),
-    new THREE.Vector3(x, y + height, z + depth),
-    new THREE.Vector3(x, y + height, z),
-  );
-  geom.faces.push(
-    new THREE.Face3(index, index + 1, index + 2),
-    new THREE.Face3(index + 2, index + 3, index)
-  );
-
-  // right
-  index = geom.vertices.length;
-  geom.vertices.push(
-    new THREE.Vector3(x + width, y, z),
-    new THREE.Vector3(x + width, y, z + depth),
-    new THREE.Vector3(x + width, y + height, z + depth),
-    new THREE.Vector3(x + width, y + height, z),
-  );
-  geom.faces.push(
-    new THREE.Face3(index, index + 1, index + 2),
-    new THREE.Face3(index + 2, index + 3, index)
-  );
-
-}
 
 const sortOnX = (a:Hole, b:Hole) => {
   if (a.x < b.x) {
@@ -182,7 +49,6 @@ const sortOnY = (a:Hole, b:Hole) => {
   return 0;
 };
 
-
 const isWall = (block:Block, holes:Array<Hole>) => {
   let r = 0
   holes.forEach((hole, index) => {
@@ -194,7 +60,6 @@ const isWall = (block:Block, holes:Array<Hole>) => {
     // console.log(index, hole.id, 'X', hole.x, holeX2, block.x, block.x2);
     // console.log(index, 'Y', hole.y, holeY2, block.y, block.y2);
   });
-  console.log(r);
   return r === 0;
 };
 
@@ -252,28 +117,8 @@ const update = (geom: THREE.Geometry, settings: WallSettings) => {
     });
     refX = lineX;
   });
-  console.log(blocks);
-  console.log('---');
-  console.log(holes);
-
-  holes.forEach((hole) => {
-    if(ctx instanceof CanvasRenderingContext2D) {
-      ctx.beginPath();
-      ctx.strokeStyle = '#ff0000';
-      ctx.lineWidth = 6;
-      ctx.rect(hole.x, hole.y, hole.width, hole.height);
-      ctx.stroke();
-    }
-  });
 
   blocks.forEach((block) => {
-    if(ctx instanceof CanvasRenderingContext2D) {
-      ctx.beginPath();
-      ctx.lineWidth = 0.3;
-      ctx.strokeStyle = '#000000';
-      ctx.rect(block.x, block.y, block.width, block.height);
-      ctx.stroke();
-    }
     if (isWall(block, holes)) {
       createBlock(geom, {
         x: block.x,
@@ -286,12 +131,7 @@ const update = (geom: THREE.Geometry, settings: WallSettings) => {
     }
   });
 
-
-
-  if(ctx instanceof CanvasRenderingContext2D) {
-    // ctx.scale(1, -1);
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-  }
+  createCanvasPreview(settings, blocks);
 
   // geom.mergeVertices();
   geom.verticesNeedUpdate = true;
