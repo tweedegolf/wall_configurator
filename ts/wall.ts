@@ -1,9 +1,8 @@
 import * as R from 'ramda';
 import * as THREE from 'three';
 import wallTexture from '../img/kilimanjaro.jpg';
-import {Hole, Block, WallSettings, CanvasPreview} from './interfaces';
+import {Hole, Block, WallState} from './interfaces';
 import createBlock from './create_block';
-import createCanvasPreview from './canvas_preview';
 
 const generateUVs = (geom:THREE.Geometry) => {
   geom.computeBoundingBox();
@@ -63,7 +62,7 @@ const isWall = (block:Block, holes:Array<Hole>) => {
   return r === 0;
 };
 
-const update = (geom: THREE.Geometry, settings: WallSettings, preview: CanvasPreview) => {
+const update = (geom: THREE.Geometry, settings: WallState) => {
   geom.vertices = [];
   geom.faces = [];
   // console.log(settings);
@@ -129,8 +128,6 @@ const update = (geom: THREE.Geometry, settings: WallSettings, preview: CanvasPre
     }
   });
 
-  preview.update(holes, blocks);
-
   geom.mergeVertices();
   geom.verticesNeedUpdate = true;
   geom.uvsNeedUpdate = true;
@@ -171,7 +168,7 @@ export const defaultSettings = {
 
 };
 
-export const createWall = (settings: WallSettings = defaultSettings) => {
+export const createWall = (settings: WallState = defaultSettings) => {
   const texture = new THREE.TextureLoader().load(wallTexture);
   // const texture = new THREE.TextureLoader().load('../img/kilimanjaro.jpg');
   texture.wrapS = THREE.RepeatWrapping;
@@ -183,16 +180,15 @@ export const createWall = (settings: WallSettings = defaultSettings) => {
   // material.map.minFilter = THREE.LinearFilter;
 
   const geom = new THREE.Geometry();
-  const preview = createCanvasPreview(settings);
-  update(geom, settings, preview);
+  update(geom, settings);
 
   const wall = new THREE.Mesh(geom, material);
   wall.castShadow = true;
   wall.receiveShadow = false;
   return {
     mesh: wall,
-    update: (data:WallSettings) => {
-      update(geom, data, preview);
+    update: (data:WallState) => {
+      update(geom, data);
     },
   }
 };

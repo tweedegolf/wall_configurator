@@ -61,4 +61,3 @@ if (element instanceof HTMLElement) {
   resize();
   render();
 }
-

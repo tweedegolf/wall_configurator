@@ -1,4 +1,4 @@
-import {Hole, Block, WallSettings} from './interfaces';
+import {Hole, Block, WallState} from './interfaces';
 
 const update = (ctx:CanvasRenderingContext2D, holes:Array<Hole>, blocks:Array<Block>) => {
   holes.forEach((hole) => {
@@ -20,7 +20,7 @@ const update = (ctx:CanvasRenderingContext2D, holes:Array<Hole>, blocks:Array<Bl
 };
 
 
-const createCanvasPreview = (settings:WallSettings) => {
+const createCanvasPreview = (settings:WallState) => {
   const canvas:HTMLElement = document.createElement('canvas');
 
   let ctx:(CanvasRenderingContext2D | null) = null;

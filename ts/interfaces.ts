@@ -24,7 +24,7 @@ export interface Block {
   height: number,
 };
 
-export interface WallSettings {
+export interface WallState {
   width: number,
   height: number,
   thickness: number,
@@ -33,4 +33,11 @@ export interface WallSettings {
 
 export interface CanvasPreview {
   update: Function
+}
+
+export interface ReduxAction {
+  type: string,
+  payload: {
+    [id:string]: number,
+  },
 }
