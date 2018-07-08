@@ -1,7 +1,7 @@
-import THREE from 'three';
+import * as THREE from 'three';
 import wallTexture from '../../img/kilimanjaro.jpg';
 
-const createMesh = ():THREE.Object3D => {
+const createWall = ():THREE.Mesh => {
   const texture = new THREE.TextureLoader().load(wallTexture);
   // const texture = new THREE.TextureLoader().load('../img/kilimanjaro.jpg');
   texture.wrapS = THREE.RepeatWrapping;
@@ -19,4 +19,4 @@ const createMesh = ():THREE.Object3D => {
   return wall;
 };
 
-export default createMesh;
+export default createWall;

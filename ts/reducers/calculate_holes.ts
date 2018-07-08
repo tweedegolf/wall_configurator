@@ -80,6 +80,7 @@ export default createSelector(
       holes,
       blocks,
       width,
+      thickness,
     };
   }
 );
