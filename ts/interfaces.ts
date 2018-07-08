@@ -31,6 +31,10 @@ export interface WallState {
   holes: Array<Hole>,
 };
 
+export interface AppState {
+  wall: WallState,
+};
+
 export interface CanvasPreview {
   update: Function
 }

@@ -4,7 +4,7 @@ import {render} from 'react-dom';
 import {Provider} from 'react-redux';
 import getStore from './reducers/store';
 import Three from './components/three';
-import Controls from './components/controls';
+import Controls from './containers/controls';
 
 const store = getStore();
 
