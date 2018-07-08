@@ -25,7 +25,7 @@ class Slider extends React.Component{
   }
   render(){
     let value = this.props.value
-    let id = this.props.id || this.props.type
+    let id = this.props.id || `slider-${Date.now()}`;
 
     function createLabel(props:PropTypes){
       let label = `${value}`;

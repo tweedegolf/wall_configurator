@@ -8,11 +8,11 @@ export interface PaneSettings {
 };
 
 export interface Hole {
+  id: string,
   x: number,
   y: number,
   width: number,
   height: number,
-  id: number,
 };
 
 export interface Block {
@@ -42,6 +42,6 @@ export interface CanvasPreview {
 export interface ReduxAction {
   type: string,
   payload: {
-    [id:string]: number,
+    [key:string]: any,
   },
 }

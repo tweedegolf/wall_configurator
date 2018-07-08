@@ -1,3 +1,4 @@
+import * as R from 'ramda';
 import React from 'react';
 import {connect} from 'react-redux';
 import WallControls from '../components/wall_controls';
@@ -24,15 +25,15 @@ interface PropTypes {
   height: number,
   thickness: number,
   holes: Array<Hole>
-  addHole: Function,
-  removeHole: Function,
-  updateWallWidth: Function,
-  updateWallHeight: Function,
-  updateWallThickness: Function,
-  updateHoleX: Function,
-  updateHoleY: Function,
-  updateHoleWidth: Function,
-  updateHoleHeight: Function,
+  addHole: (...a:Array<any>) => any,
+  removeHole: (...a:Array<any>) => any,
+  updateWallWidth: (...a:Array<any>) => any,
+  updateWallHeight: (...a:Array<any>) => any,
+  updateWallThickness: (...a:Array<any>) => any,
+  updateHoleX: (...a:Array<any>) => any,
+  updateHoleY: (...a:Array<any>) => any,
+  updateHoleWidth: (...a:Array<any>) => any,
+  updateHoleHeight: (...a:Array<any>) => any,
 };
 
 const mapStateToProps = (state:AppState) => {
@@ -59,20 +60,20 @@ const mapDispatchToProps = (dispatch) => {
     addHole: () => {
       dispatch(addHole());
     },
-    removeHole: (e) => {
-      dispatch(removeHole(parseInt(e.target.parentNode.id, 10)));
+    removeHole: (id:string) => {
+      dispatch(removeHole(id));
     },
-    updateHoleX: (e) => {
-      dispatch(updateHoleX(parseInt(e.target.parentNode.id, 10), e.target.value));
+    updateHoleX: (id:string, e) => {
+      dispatch(updateHoleX(id, e.target.value));
     },
-    updateHoleY: (e) => {
-      dispatch(updateHoleY(parseInt(e.target.parentNode.id, 10), e.target.value));
+    updateHoleY: (id:string, e) => {
+      dispatch(updateHoleY(id, e.target.value));
     },
-    updateHoleWidth: (e) => {
-      dispatch(updateHoleWidth(parseInt(e.target.parentNode.id, 10), e.target.value));
+    updateHoleWidth: (id:string, e) => {
+      dispatch(updateHoleWidth(id, e.target.value));
     },
-    updateHoleHeight: (e) => {
-      dispatch(updateHoleHeight(parseInt(e.target.parentNode.id, 10), e.target.value));
+    updateHoleHeight: (id:string, e) => {
+      dispatch(updateHoleHeight(id, e.target.value));
     },
   }
 }
@@ -110,10 +111,10 @@ class Controls extends React.Component {
             width={hole.width}
             height={hole.height}
             removeHole={this.props.removeHole}
-            updateHoleX={this.props.updateHoleX}
-            updateHoleY={this.props.updateHoleY}
-            updateHoleWidth={this.props.updateHoleWidth}
-            updateHoleHeight={this.props.updateHoleHeight}
+            updateHoleX={R.curry(this.props.updateHoleX)(hole.id)}
+            updateHoleY={R.curry(this.props.updateHoleY)(hole.id)}
+            updateHoleWidth={R.curry(this.props.updateHoleWidth)(hole.id)}
+            updateHoleHeight={R.curry(this.props.updateHoleHeight)(hole.id)}
           />
         )}
       </div>

@@ -41,7 +41,7 @@ export const addHole = () => {
   }
 };
 
-export const removeHole = (id:number) => {
+export const removeHole = (id:string) => {
   return {
     type: REMOVE_HOLE,
     payload: {
@@ -50,7 +50,7 @@ export const removeHole = (id:number) => {
   }
 };
 
-export const updateHoleX = (id: number, x:number) => {
+export const updateHoleX = (id: string, x:number) => {
   return {
     type: UPDATE_HOLE_X,
     payload: {
@@ -60,7 +60,7 @@ export const updateHoleX = (id: number, x:number) => {
   }
 };
 
-export const updateHoleY = (id: number, y:number) => {
+export const updateHoleY = (id: string, y:number) => {
   return {
     type: UPDATE_HOLE_Y,
     payload: {
@@ -70,7 +70,7 @@ export const updateHoleY = (id: number, y:number) => {
   }
 };
 
-export const updateHoleWidth = (id: number, width:number) => {
+export const updateHoleWidth = (id: string, width:number) => {
   return {
     type: UPDATE_HOLE_WIDTH,
     payload: {
@@ -80,7 +80,7 @@ export const updateHoleWidth = (id: number, width:number) => {
   }
 };
 
-export const updateHoleHeight = (id: number, height:number) => {
+export const updateHoleHeight = (id: string, height:number) => {
   return {
     type: UPDATE_HOLE_HEIGHT,
     payload: {
