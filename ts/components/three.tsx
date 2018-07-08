@@ -5,7 +5,6 @@ import {createWall, defaultSettings} from '../wall';
 import {WallState} from '../interfaces';
 
 interface PropsType {
-  url: null | string,
   windowWidth: number,
   windowHeight: number,
   wallSettings: WallState,
