@@ -36,10 +36,9 @@ class Slider extends React.Component{
     }
 
     return (
-      <div>
+      <div id={this.props.id}>
         <label htmlFor={id} dangerouslySetInnerHTML={createLabel(this.props)} />
         <input
-          id={id}
           key={this.props.type}
           type="range"
           defaultValue={`${value}`}

@@ -2,6 +2,7 @@ export const UPDATE_WALL_WIDTH = 'update wall width';
 export const UPDATE_WALL_HEIGHT = 'update wall height';
 export const UPDATE_WALL_THICKNESS = 'update wall thickness';
 export const ADD_HOLE = 'add hole';
+export const REMOVE_HOLE = 'remove hole';
 export const UPDATE_HOLE_X = 'update hole x';
 export const UPDATE_HOLE_Y = 'update hole y';
 export const UPDATE_HOLE_WIDTH = 'update hole width';
@@ -37,6 +38,15 @@ export const updateWallThickness = (thickness:number) => {
 export const addHole = () => {
   return {
     type: ADD_HOLE,
+  }
+};
+
+export const removeHole = (id:number) => {
+  return {
+    type: REMOVE_HOLE,
+    payload: {
+      id,
+    }
   }
 };
 

@@ -13,12 +13,14 @@ interface HoleControlsProps {
   updateHoleY: Function,
   updateHoleWidth: Function,
   updateHoleHeight: Function,
+  removeHole: Function,
 };
 
 const HoleControls = (props:HoleControlsProps) => (
-  <div>
+  <div className="hole" id={`${props.id}`}>
+    <button onClick={props.removeHole}>X</button>
     <Slider
-      id={`{props.id}`}
+      id={`${props.id}`}
       min={0}
       max={props.wallWidth}
       label="x"
@@ -26,7 +28,7 @@ const HoleControls = (props:HoleControlsProps) => (
       onChange={props.updateHoleX}
       />
     <Slider
-      id={`{props.id}`}
+      id={`${props.id}`}
       min={0}
       max={props.wallHeight}
       label="y"
@@ -34,15 +36,15 @@ const HoleControls = (props:HoleControlsProps) => (
       onChange={props.updateHoleY}
       />
     <Slider
+      id={`${props.id}`}
       min={0}
-      id={`{props.id}`}
       max={props.wallWidth}
       label="width"
       value={props.width}
       onChange={props.updateHoleWidth}
       />
     <Slider
-      id={`{props.id}`}
+      id={`${props.id}`}
       min={0}
       max={props.wallHeight}
       label="height"

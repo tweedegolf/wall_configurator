@@ -61,7 +61,7 @@ class Three extends React.Component {
     if(this.initialized === false) {
       this.initialized = true;
       this.render3D();
-      return <div>aap</div>;
+      return <div id="three">aap</div>;
     }
     this.render3D();
     return false;

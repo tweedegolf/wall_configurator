@@ -60,6 +60,12 @@ const wall = (state:WallState = wallInitialState, action:ReduxAction):WallState 
         height: 100,
       }],
     }
+  } else if (action.type === Actions.REMOVE_HOLE) {
+    const holes = [...state.holes];
+    return {
+      ...state,
+      holes: holes.filter(hole => hole.id !== action.payload.id),
+    }
   } else if (action.type === Actions.UPDATE_HOLE_X) {
     const holes = [...state.holes];
     holes[action.payload.id].x = action.payload.x;
@@ -91,7 +97,6 @@ const wall = (state:WallState = wallInitialState, action:ReduxAction):WallState 
   }
   return state;
 };
-
 
 export {
   wall,
