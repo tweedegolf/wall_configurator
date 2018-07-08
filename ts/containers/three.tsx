@@ -19,8 +19,6 @@ interface Three {
   camera: THREE.PerspectiveCamera,
   renderer: THREE.WebGLRenderer,
   wall: THREE.Mesh,
-  initialized: boolean,
-  refElement: React.RefObject<HTMLDivElement> ,
 }
 
 const mapStateToProps = (state: AppState):PropsType => {
@@ -44,7 +42,6 @@ class Three extends React.Component {
 
   constructor(props) {
     super(props);
-    this.initialized = false;
     this.scene = new THREE.Scene();
 
     this.camera = new THREE.PerspectiveCamera(75, 1920/1080, 0.1, 10000);
@@ -74,33 +71,23 @@ class Three extends React.Component {
 
     this.wall = createWall();
     this.scene.add(this.wall);
-
-    this.refElement = React.createRef();
+    props.element.appendChild(this.renderer.domElement);
+    const rect = props.element.getBoundingClientRect();
+    this.renderer.setSize(rect.width, rect.height)
+    this.camera.aspect = rect.width / rect.height;
+    this.camera.updateProjectionMatrix();
   }
 
   render3D(props?: PropsType) {
     if (props) {
       updateGeometry(this.wall.geometry, props.thickness, props.blocks, props.holes);
+      this.wall.position.x = -props.width / 2;
     }
     this.renderer.render(this.scene, this.camera);
   }
 
-  componentDidMount() {
-    this.refElement.current.appendChild(this.renderer.domElement)
-  }
-
-  shouldComponentUpdate(nextProps:PropsType) {
-    if (this.initialized === true) {
-      this.render3D(nextProps);
-      return false;
-    }
-  }
-
   render() {
-    if (this.initialized === false) {
-      this.render3D(this.props);
-      return <div id="three" ref={this.refElement}/>;
-    }
+    this.render3D(this.props);
     return false;
   }
 }

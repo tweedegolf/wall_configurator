@@ -79,7 +79,7 @@ const wall = (state:WallState = wallInitialState, action:ReduxAction):WallState 
     const holes = [...state.holes];
     const index = getHoleIndexById(holes, action.payload.id);
     if (index !== -1) {
-      holes[index].x = action.payload.x;
+      holes[index].x = parseInt(action.payload.x, 10);
       return {
         ...state,
         holes,
@@ -89,7 +89,7 @@ const wall = (state:WallState = wallInitialState, action:ReduxAction):WallState 
     const holes = [...state.holes];
     const index = getHoleIndexById(holes, action.payload.id);
     if (index !== -1) {
-      holes[index].y = action.payload.y;
+      holes[index].y = parseInt(action.payload.y, 10);;
       return {
         ...state,
         holes,
@@ -99,7 +99,7 @@ const wall = (state:WallState = wallInitialState, action:ReduxAction):WallState 
     const holes = [...state.holes];
     const index = getHoleIndexById(holes, action.payload.id);
     if (index !== -1) {
-      holes[index].width = action.payload.width;
+      holes[index].width = parseInt(action.payload.width, 10);;
       return {
         ...state,
         holes,
@@ -109,7 +109,7 @@ const wall = (state:WallState = wallInitialState, action:ReduxAction):WallState 
     const holes = [...state.holes];
     const index = getHoleIndexById(holes, action.payload.id);
     if(index !== -1) {
-      holes[index].height = action.payload.height;
+      holes[index].height = parseInt(action.payload.height, 10);
       return {
         ...state,
         holes,

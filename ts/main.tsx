@@ -11,10 +11,10 @@ const store = getStore();
 render(
   <Provider store={store}>
     <div>
-      <Three />
+      <Three element={document.getElementById('three')}/>
       <Controls />
     </div>
   </Provider>,
-  document.getElementById('app')
+  document.getElementById('right')
 );
 

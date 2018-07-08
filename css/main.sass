@@ -14,9 +14,9 @@ h2
   text-transform: uppercase
 
 #controls
-  float: right
   width: 240px
   font-family: monospace
+  float: right
 
   input[type=range]
     vertical-align: middle
@@ -56,12 +56,13 @@ h2
         font-family: monospace
         float: right
 
-#three
-  float: left
-  width: calc(100vw-240px)
-  height: 100vh
+#left
+  #three
+    float: left
+    height: 100vh
+    width: calc(100vw - 240px)
 
-#preview
-  float: left
-  max-width: calc(100vw-240px)
+  #preview
+    float: left
+    max-width: calc(100vw - 240px)
 
