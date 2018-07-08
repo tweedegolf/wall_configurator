@@ -21,22 +21,7 @@ const update = (ctx:CanvasRenderingContext2D, holes:Array<Hole>, blocks:Array<Bl
 
 
 const createCanvasPreview = (settings:WallState) => {
-  const canvas:HTMLElement = document.createElement('canvas');
 
-  let ctx:(CanvasRenderingContext2D | null) = null;
-  if(canvas instanceof HTMLCanvasElement) {
-    ctx = canvas.getContext('2d');
-    if(ctx instanceof CanvasRenderingContext2D) {
-      ctx.canvas.width = settings.width;
-      ctx.canvas.height = settings.height;
-      const element = document.getElementById('preview');
-      if (element instanceof HTMLElement) {
-        element.style.height = `${settings.height}px`;
-        element.style.transform = `scale(1, -1)`;
-        element.appendChild(canvas);
-      }
-    }
-  }
 
   return {
     update: (holes:Array<Hole>, blocks:Array<Block>) => {
