@@ -7,14 +7,13 @@ interface PropsType {
   blocks: Array<Block>,
   holes:Array<Hole>,
   width: number,
+  height: number,
   thickness: number,
 };
 
 interface Preview {
-  scene: THREE.Scene,
-  camera: THREE.PerspectiveCamera,
-  renderer: THREE.WebGLRenderer,
-  wall: THREE.Mesh,
+  ctx: CanvasRenderingContext2D,
+  element: HTMLDivElement,
 }
 
 const mapStateToProps = (state: AppState):PropsType => {
@@ -22,17 +21,19 @@ const mapStateToProps = (state: AppState):PropsType => {
     blocks,
     holes,
     width,
+    height,
     thickness,
   } = calculateHoles(state);
   return {
     blocks,
     holes,
     width,
+    height,
     thickness,
   }
 }
 
-class Three extends React.Component {
+class Preview extends React.Component {
   static defaultProps = {
   }
 
@@ -41,36 +42,45 @@ class Three extends React.Component {
 
     const canvas:HTMLElement = document.createElement('canvas');
 
-    let ctx:(CanvasRenderingContext2D | null) = null;
     if(canvas instanceof HTMLCanvasElement) {
-      this.ctx = canvas.getContext('2d');
+      let ctx:(CanvasRenderingContext2D | null) = canvas.getContext('2d');
       if(ctx instanceof CanvasRenderingContext2D) {
-        ctx.canvas.width = settings.width;
-        ctx.canvas.height = settings.height;
-        const element = document.getElementById('preview');
-        if (element instanceof HTMLElement) {
-          element.style.height = `${settings.height}px`;
-          element.style.transform = `scale(1, -1)`;
-          element.appendChild(canvas);
-        }
+        this.ctx = ctx;
+        this.element = props.element;
+        this.element.style.transform = `scale(1, -1)`;
+        this.element.appendChild(canvas);
       }
     }
-
-
   }
 
-  render3D(props?: PropsType) {
-    if (props) {
-      updateGeometry(this.wall.geometry, props.thickness, props.blocks, props.holes);
-      this.wall.position.x = -props.width / 2;
+  render2D(props: PropsType) {
+    this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+    if (props.width !== this.ctx.canvas.width || props.height !== this.ctx.canvas.height) {
+      this.element.style.height = `${props.height}px`;
+      this.ctx.canvas.width = props.width;
+      this.ctx.canvas.height = props.height;
     }
-    this.renderer.render(this.scene, this.camera);
+    props.holes.forEach((hole) => {
+      this.ctx.beginPath();
+      this.ctx.strokeStyle = '#ff0000';
+      this.ctx.lineWidth = 6;
+      this.ctx.rect(hole.x, hole.y, hole.width, hole.height);
+      this.ctx.stroke();
+    });
+
+    props.blocks.forEach((block) => {
+      this.ctx.beginPath();
+      this.ctx.lineWidth = 0.3;
+      this.ctx.strokeStyle = '#000000';
+      this.ctx.rect(block.x, block.y, block.width, block.height);
+      this.ctx.stroke();
+    });
   }
 
   render() {
-    this.render3D(this.props);
+    this.render2D(this.props);
     return false;
   }
 }
 
-export default connect(mapStateToProps)(Three);
+export default connect(mapStateToProps)(Preview);
