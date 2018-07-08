@@ -18,18 +18,6 @@ interface Slider {
 };
 
 
-const labelStyle = {
-  width: '150px',
-  height: '1.9em',
-  display: 'inline-block'
-}
-
-const inputStyle = {
-  verticalAlign: 'middle',
-  //marginBottom: '5px',
-  width: '200px'
-}
-
 /* React wrapper for input type Range */
 class Slider extends React.Component{
   static defaultProps = {
@@ -42,16 +30,15 @@ class Slider extends React.Component{
     function createLabel(props:PropTypes){
       let label = `${value}`;
       if(props.label){
-        label = props.label + '<em>' + value + '</em>'
+        label = props.label + ': <em>' + value + '</em>'
       }
       return {__html: label}
     }
 
     return (
       <div>
-        <label htmlFor={id} style={labelStyle} dangerouslySetInnerHTML={createLabel(this.props)} />
+        <label htmlFor={id} dangerouslySetInnerHTML={createLabel(this.props)} />
         <input
-          style={inputStyle}
           id={id}
           key={this.props.type}
           type="range"
