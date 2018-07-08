@@ -40,6 +40,12 @@
   dependencies:
     redux "^3.6.0"
 
+"@types/reselect@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@types/reselect/-/reselect-2.2.0.tgz#c667206cfdc38190e1d379babe08865b2288575f"
+  dependencies:
+    reselect "*"
+
 "@types/three@^0.92.11":
   version "0.92.12"
   resolved "https://registry.yarnpkg.com/@types/three/-/three-0.92.12.tgz#7c0f78bac119ccf9e3de159728fe0b12d9c6d410"
@@ -3826,6 +3832,10 @@ require-directory@^2.1.1:
 require-main-filename@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/require-main-filename/-/require-main-filename-1.0.1.tgz#97f717b69d48784f5f526a6c5aa8ffdda055a4d1"
+
+reselect@*, reselect@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/reselect/-/reselect-3.0.1.tgz#efdaa98ea7451324d092b2b2163a6a1d7a9a2147"
 
 resolve-url@^0.2.1:
   version "0.2.1"

@@ -16,10 +16,12 @@
     "@types/react-dom": "^16.0.6",
     "@types/react-redux": "^6.0.3",
     "@types/redux-logger": "^3.0.6",
+    "@types/reselect": "^2.2.0",
     "@types/three": "^0.92.11",
     "babel-preset-react": "^6.24.1",
     "node-sass": "^4.9.0",
     "parcel-bundler": "^1.9.4",
+    "reselect": "^3.0.1",
     "typescript": "^2.9.2"
   },
   "scripts": {

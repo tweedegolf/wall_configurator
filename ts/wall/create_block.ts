@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import {PaneSettings} from './interfaces';
+import {PaneSettings} from '../interfaces';
 
 const createBlock = (geom:THREE.Geometry, settings: PaneSettings) => {
   const {

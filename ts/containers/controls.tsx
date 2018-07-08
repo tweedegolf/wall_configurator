@@ -37,12 +37,11 @@ interface PropTypes {
 };
 
 const mapStateToProps = (state:AppState) => {
-  console.log(state.wall.holes);
   return {
-      width: state.wall.width,
-      height: state.wall.height,
-      thickness: state.wall.thickness,
-      holes: state.wall.holes,
+    width: state.wall.width,
+    height: state.wall.height,
+    thickness: state.wall.thickness,
+    holes: state.wall.holes,
   };
 };
 

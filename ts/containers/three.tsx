@@ -1,27 +1,43 @@
 import React from 'react';
 import * as THREE from 'three';
+import { connect } from 'react-redux';
 import OrbitControls from '../../lib/OrbitControls';
-import {createWall, defaultSettings} from '../wall';
-import {WallState} from '../interfaces';
+import {AppState, Block, Hole} from '../interfaces';
+import createMesh from '../wall/create_mesh';
+import calculateHoles from '../reducers/calculate_holes';
 
 interface PropsType {
-  windowWidth: number,
-  windowHeight: number,
-  wallSettings: WallState,
+  blocks: Array<Block>,
+  holes:Array<Hole>,
+  width: number,
 };
 
 interface Three {
   scene: THREE.Scene,
   camera: THREE.PerspectiveCamera,
   renderer: THREE.WebGLRenderer,
+  wallMesh: THREE.Mesh,
   initialized: boolean,
+}
+
+const mapStateToProps = (state: AppState):PropsType => {
+  const {
+    blocks,
+    holes,
+    width,
+  } = calculateHoles(state);
+  return {
+    blocks,
+    holes,
+    width
+  }
 }
 
 class Three extends React.Component {
   static defaultProps = {
   }
 
-  constructor(props:PropsType) {
+  constructor(props) {
     super(props);
     this.initialized = false;
     this.scene = new THREE.Scene();
@@ -50,6 +66,9 @@ class Three extends React.Component {
     controls.addEventListener('change', (e:THREE.Event) => {
       this.render3D();
     });
+
+    this.wallMesh = createWall();
+    // this.scene.add(this.wall);
   }
 
   render3D() {
@@ -68,4 +87,4 @@ class Three extends React.Component {
   }
 }
 
-export default Three;
+export default connect(mapStateToProps)(Three);
