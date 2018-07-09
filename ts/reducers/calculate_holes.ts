@@ -38,7 +38,11 @@ export default createSelector(
     let rasterX:Array<number> = [];
     holes.forEach((hole) => {
       rasterX.push(hole.x);
-      rasterX.push(hole.x + hole.width);
+      let w = hole.x + hole.width;
+      if (w > width) {
+        w = width;
+      }
+      rasterX.push(w);
     });
     rasterX.sort((a, b) => a - b);
     rasterX = uniq(rasterX);
@@ -48,7 +52,11 @@ export default createSelector(
     let rasterY:Array<number> = [];
     holes.forEach((hole) => {
       rasterY.push(hole.y);
-      rasterY.push(hole.y + hole.height);
+      let h = hole.y + hole.height;
+      if (h > height) {
+        h = height;
+      }
+      rasterY.push(h);
     });
     rasterY.sort((a, b) => a - b);
     rasterY = uniq(rasterY);
