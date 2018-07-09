@@ -12,8 +12,8 @@ const store = getStore();
 render(
   <Provider store={store}>
     <div>
-      <Preview element={document.getElementById('preview')}/>
-      <Three element={document.getElementById('three')}/>
+      <Preview element={document.getElementById('view2D')}/>
+      <Three element={document.getElementById('view3D')}/>
       <Controls />
     </div>
   </Provider>,

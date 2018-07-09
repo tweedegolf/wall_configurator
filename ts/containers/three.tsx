@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import { connect } from 'react-redux';
 import OrbitControls from '../../lib/OrbitControls';
 import {AppState, Block, Hole} from '../interfaces';
-import createWall from '../wall/create';
+import createWall from '../wall/create_wall';
 import {updateGeometry} from '../wall/utils';
 import calculateHoles from '../reducers/calculate_holes';
 
@@ -12,6 +12,7 @@ interface PropsType {
   holes:Array<Hole>,
   width: number,
   thickness: number,
+  // element?: HTMLElement
 };
 
 interface Three {
@@ -19,6 +20,8 @@ interface Three {
   camera: THREE.PerspectiveCamera,
   renderer: THREE.WebGLRenderer,
   wall: THREE.Mesh,
+  element: HTMLDivElement,
+  boundResize: (e:Event) => void
 }
 
 const mapStateToProps = (state: AppState):PropsType => {
@@ -42,6 +45,7 @@ class Three extends React.Component {
 
   constructor(props) {
     super(props);
+    this.element = props.element;
     this.scene = new THREE.Scene();
 
     this.camera = new THREE.PerspectiveCamera(75, 1920/1080, 0.1, 10000);
@@ -69,13 +73,29 @@ class Three extends React.Component {
       this.render3D();
     });
 
-    this.wall = createWall();
+    this.wall = createWall(() => {
+      this.render3D();
+    });
     this.scene.add(this.wall);
-    props.element.appendChild(this.renderer.domElement);
-    const rect = props.element.getBoundingClientRect();
+    this.element.appendChild(this.renderer.domElement);
+    this.boundResize = this.resize.bind(this);
+    this.resize();
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', this.boundResize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.boundResize);
+  }
+
+  resize() {
+    const rect = this.element.getBoundingClientRect();
     this.renderer.setSize(rect.width, rect.height)
     this.camera.aspect = rect.width / rect.height;
     this.camera.updateProjectionMatrix();
+    this.render3D();
   }
 
   render3D(props?: PropsType) {

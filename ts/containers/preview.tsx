@@ -14,6 +14,7 @@ interface PropsType {
 interface Preview {
   ctx: CanvasRenderingContext2D,
   element: HTMLDivElement,
+  boundResize: (e:Event) => void
 }
 
 const mapStateToProps = (state: AppState):PropsType => {
@@ -39,7 +40,6 @@ class Preview extends React.Component {
 
   constructor(props) {
     super(props);
-
     const canvas:HTMLElement = document.createElement('canvas');
 
     if(canvas instanceof HTMLCanvasElement) {
@@ -55,8 +55,27 @@ class Preview extends React.Component {
         } = this.element.getBoundingClientRect();
         this.ctx.canvas.width = width;
         this.ctx.canvas.height = height;
+        this.boundResize = this.resize.bind(this);
       }
     }
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', this.boundResize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.boundResize);
+  }
+
+  resize() {
+    const {
+      width,
+      height,
+    } = this.element.getBoundingClientRect();
+    this.ctx.canvas.width = width;
+    this.ctx.canvas.height = height;
+    this.render2D(this.props);
   }
 
   render2D(props: PropsType) {

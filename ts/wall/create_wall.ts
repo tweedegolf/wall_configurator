@@ -1,8 +1,8 @@
 import * as THREE from 'three';
 import wallTexture from '../../img/kilimanjaro.jpg';
 
-const createWall = ():THREE.Mesh => {
-  const texture = new THREE.TextureLoader().load(wallTexture);
+const createWall = (callback: Function):THREE.Mesh => {
+  const texture = new THREE.TextureLoader().load(wallTexture, callback);
   // const texture = new THREE.TextureLoader().load('../img/kilimanjaro.jpg');
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;
