@@ -85,8 +85,8 @@ class Controls extends React.Component {
   }
   render() {
     return (<div id="controls">
+      <h2>Wall settings</h2>
       <div id="wall">
-        <h2>Wall settings</h2>
         <WallControls
           width={this.props.width}
           height={this.props.height}
@@ -96,8 +96,8 @@ class Controls extends React.Component {
           updateWallThickness={this.props.updateWallThickness}
           addHole={this.props.addHole}
         />
-        <h2>Hole Settings</h2>
       </div>
+      <h2>Hole Settings</h2>
       <div id="holes">
         {this.props.holes.map(hole =>
           <HoleControls

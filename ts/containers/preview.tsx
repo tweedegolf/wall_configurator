@@ -49,18 +49,56 @@ class Preview extends React.Component {
         this.element = props.element;
         this.element.style.transform = `scale(1, -1)`;
         this.element.appendChild(canvas);
+        const {
+          width,
+          height,
+        } = this.element.getBoundingClientRect();
+        this.ctx.canvas.width = width;
+        this.ctx.canvas.height = height;
       }
     }
   }
 
   render2D(props: PropsType) {
     this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
-    if (props.width !== this.ctx.canvas.width || props.height !== this.ctx.canvas.height) {
-      this.element.style.height = `${props.height}px`;
-      this.ctx.canvas.width = props.width;
-      this.ctx.canvas.height = props.height;
+    const {
+      holes,
+      blocks,
+      width,
+      height,
+    } = props;
+
+    const {
+      canvas: {
+        width: canvasWidth,
+        height: canvasHeight,
+      },
+    } = this.ctx;
+
+    let s:number = 0;
+
+    if (height >= canvasHeight) {
+      const w = canvasHeight * (width / height);
+      if (w >= canvasWidth) {
+        s = canvasWidth / width;
+      } else {
+        s = canvasHeight / height;
+      }
+    } else if (width >= canvasWidth) {
+      const h = canvasWidth * (height / width);
+      if (h >= canvasHeight) {
+        s = canvasHeight / height;
+      } else {
+        s = canvasWidth / width;
+      }
     }
-    props.holes.forEach((hole) => {
+    const transX = (canvasWidth / 2) - ((width * s) / 2);
+    const transY = (canvasHeight / 2) - ((height * s) / 2);
+    this.ctx.transform(s, 0, 0, s, transX, transY);
+    this.ctx.fillStyle = '#ffffff';
+    this.ctx.fillRect(0, 0, width, height);
+
+    holes.forEach((hole) => {
       this.ctx.beginPath();
       this.ctx.strokeStyle = '#ff0000';
       this.ctx.lineWidth = 6;
@@ -68,13 +106,15 @@ class Preview extends React.Component {
       this.ctx.stroke();
     });
 
-    props.blocks.forEach((block) => {
+    blocks.forEach((block) => {
       this.ctx.beginPath();
       this.ctx.lineWidth = 0.3;
       this.ctx.strokeStyle = '#000000';
       this.ctx.rect(block.x, block.y, block.width, block.height);
       this.ctx.stroke();
     });
+
+    this.ctx.setTransform(1, 0, 0, 1, 0, 0);
   }
 
   render() {

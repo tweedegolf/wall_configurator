@@ -6,7 +6,7 @@ html
   box-sizing: border-box
 
 body
-	background-color: #ffffff
+	background-color: #fffff0
 
 h2
   font-weight: 600
@@ -14,9 +14,8 @@ h2
   text-transform: uppercase
 
 #controls
-  width: 240px
+  // width: 100%
   font-family: monospace
-  float: right
 
   input[type=range]
     vertical-align: middle
@@ -32,8 +31,11 @@ h2
     font-weight: 800
 
   #wall
-    // border-bottom: 1px solid #aaa
-    height: 255px
+    height: 190px
+    border: 1px solid #bbb
+    padding: 5px
+    width: 210px
+    background-color: #fff
 
     button
       margin: 15px 0
@@ -44,6 +46,7 @@ h2
     margin-top: 0px
     overflow-y: auto
     height: calc(100vh - 255px)
+    background-color: #fff
 
     .hole
       width: 210px
@@ -56,13 +59,29 @@ h2
         font-family: monospace
         float: right
 
+    .hole:first-child
+      margin-top: 0
+
 #left
+  width: calc(100vw - 240px)
+  height: 100vh
+  overflow: none
+  float: left
+
   #three
     float: left
-    height: 100vh
-    width: calc(100vw - 240px)
+    height: 65vh
+    width: 100%
+    border-top: 1px solid #ccc
 
   #preview
     float: left
-    max-width: calc(100vw - 240px)
+    height: 35vh
+    width: 100%
+    // background-color: #fff
+    // background-color: rgba(255, 0, 0, 0.3)
 
+#right
+  width: 240px
+  float: right
+  overflow: none
