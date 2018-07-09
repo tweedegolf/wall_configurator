@@ -41,7 +41,7 @@ const mapStateToProps = (state:AppState) => {
     width: state.wall.width,
     height: state.wall.height,
     thickness: state.wall.thickness,
-    holes: state.wall.holes,
+    holes: R.sortBy(R.prop('index'))(state.wall.holes),
   };
 };
 

@@ -8,27 +8,30 @@ const wallInitialState:WallState = {
   height: 350,
   thickness: 30,
   holes: [
-    {
-      id: 'hole-0',
-      x: 300,
-      y: 50,
-      width: 130,
-      height: 100,
-    },
-    {
-      id: 'hole-1',
-      x: 120,
-      y: 150,
-      width: 260,
-      height: 150,
-    },
-    {
-      id: 'hole-2',
-      x: 20,
-      y: 100,
-      width: 150,
-      height: 150,
-    }
+    // {
+    //   id: 'hole-0',
+    //   index: 0,
+    //   x: 300,
+    //   y: 50,
+    //   width: 130,
+    //   height: 100,
+    // },
+    // {
+    //   id: 'hole-1',
+    //   index: 1,
+    //   x: 120,
+    //   y: 150,
+    //   width: 260,
+    //   height: 150,
+    // },
+    // {
+    //   id: 'hole-2',
+    //   index: 2,
+    //   x: 20,
+    //   y: 100,
+    //   width: 150,
+    //   height: 150,
+    // }
   ],
 };
 
@@ -63,8 +66,9 @@ const wall = (state:WallState = wallInitialState, action:ReduxAction):WallState 
       ...state,
       holes: [...state.holes, {
         id: `hole-${Date.now()}`,
-        x: 10,
-        y: 10,
+        index: state.holes.length,
+        x: (state.width / 2) - 50,
+        y: (state.height / 2) - 50,
         width: 100,
         height: 100,
       }],

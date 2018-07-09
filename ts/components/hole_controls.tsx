@@ -19,6 +19,7 @@ interface HoleControlsProps {
 const HoleControls = (props:HoleControlsProps) => (
   <div className="hole" id={props.id}>
     <button onClick={() => { props.removeHole(props.id) }}>X</button>
+    {/* <div>{props.id}</div> */}
     <Slider
       min={0}
       max={props.wallWidth}

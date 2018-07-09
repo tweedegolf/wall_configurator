@@ -9,6 +9,7 @@ export interface PaneSettings {
 
 export interface Hole {
   id: string,
+  index: number,
   x: number,
   y: number,
   width: number,

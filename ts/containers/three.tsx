@@ -11,6 +11,7 @@ interface PropsType {
   blocks: Array<Block>,
   holes:Array<Hole>,
   width: number,
+  height: number,
   thickness: number,
   // element?: HTMLElement
 };
@@ -29,12 +30,14 @@ const mapStateToProps = (state: AppState):PropsType => {
     blocks,
     holes,
     width,
+    height,
     thickness,
   } = calculateHoles(state);
   return {
     blocks,
     holes,
     width,
+    height,
     thickness,
   }
 }
@@ -48,7 +51,7 @@ class Three extends React.Component {
     this.element = props.element;
     this.scene = new THREE.Scene();
 
-    this.camera = new THREE.PerspectiveCamera(75, 1920/1080, 0.1, 10000);
+    this.camera = new THREE.PerspectiveCamera(75, 1920/1080, 0.01, 100000);
     this.camera.position.set(0, 1000, 500);
     this.camera.lookAt(new THREE.Vector3(0, 0, 0));
 
@@ -102,6 +105,10 @@ class Three extends React.Component {
     if (props) {
       updateGeometry(this.wall.geometry, props.thickness, props.blocks, props.holes);
       this.wall.position.x = -props.width / 2;
+      const repeatX = (props.width / 500) * 3;
+      const repeatY = (props.height / 350) * 3;
+      // console.log(repeatX, repeatY);
+      this.wall.material.map.repeat.set(repeatX, repeatY);
     }
     this.renderer.render(this.scene, this.camera);
   }
