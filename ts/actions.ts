@@ -1,3 +1,8 @@
+import {Object3D} from 'three';
+import fetchColladas from './fetch_colladas';
+import { ColladaData } from './interfaces';
+
+
 export const UPDATE_WALL_WIDTH = 'update wall width';
 export const UPDATE_WALL_HEIGHT = 'update wall height';
 export const UPDATE_WALL_THICKNESS = 'update wall thickness';
@@ -86,6 +91,73 @@ export const updateHoleHeight = (id: string, height:number) => {
     payload: {
       id,
       height,
+    },
+  }
+};
+
+export const COLLADAS_LOADED = 'colladas loaded';
+export const colladasLoaded = (colladas:Array<ColladaData>) => {
+  return {
+    type: COLLADAS_LOADED,
+    payload: {
+      colladas,
+    },
+  }
+};
+
+export const COLLADAS_LOADING = 'colladas loading';
+export const colladasLoading = () => {
+  return {
+    type: COLLADAS_LOADING,
+  }
+};
+
+export const loadColladas = () => {
+  return async (dispatch) => {
+    dispatch(colladasLoading());
+    const colladas = await fetchColladas();
+    dispatch(colladasLoaded(colladas));
+  };
+};
+
+export const ADD_COLLADA = 'add collada';
+export const addCollada = (collada:ColladaData) => {
+  return {
+    type: ADD_COLLADA,
+    payload: {
+      collada,
+    }
+  };
+};
+
+export const REMOVE_COLLADA = 'remove collada';
+export const removeCollada = (id:string) => {
+  return {
+    type: REMOVE_COLLADA,
+    payload: {
+      id,
+    }
+  };
+};
+
+export const UPDATE_COLLADA_X = 'update collada x';
+export const updateColladaX = (id: string, x:number) => {
+  return {
+    type: UPDATE_COLLADA_X,
+    payload: {
+      id,
+      x,
+    },
+  }
+};
+
+export const UPDATE_COLLADA_Y = 'update collada y';
+export const updateColladaY= (id: string, y:number) => {
+  return {
+    type: UPDATE_COLLADA_Y,
+    payload: {
+      id,
+      y,
     },
   }
 };

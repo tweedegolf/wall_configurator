@@ -1,14 +1,16 @@
 import React from 'react';
 import Slider from './slider';
+import { ColladaData } from '../interfaces';
 
 interface WallControlsProps {
   width: number,
   height: number,
   thickness: number,
-  addHole: Function,
-  updateWallWidth: Function,
-  updateWallHeight: Function,
-  updateWallThickness: Function,
+  allColladas: Array<ColladaData>
+  addHole: (...a:Array<any>) => any,
+  updateWallWidth: (...a:Array<any>) => any,
+  updateWallHeight: (...a:Array<any>) => any,
+  updateWallThickness: (...a:Array<any>) => any,
 };
 
 const WallControls = (props:WallControlsProps) => (
@@ -37,6 +39,12 @@ const WallControls = (props:WallControlsProps) => (
     <button
       onClick={props.addHole}
     >add hole</button>
+    <select>
+      <option key="select-collada" id="select-collada">add collada</option>
+      {props.allColladas.map(collada =>
+        <option key={collada.id} id={collada.id}>{collada.name.toLowerCase()}</option>
+      )}
+    </select>
   </div>
 );
 

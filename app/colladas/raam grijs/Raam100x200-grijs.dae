@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <asset>
+    <contributor>
+      <author>Boris</author>
+      <authoring_tool>OpenCOLLADA2016;  Version: 1.6;  Revision: 61</authoring_tool>
+      <comments>
+			ColladaMaya export options:
+			bakeTransforms=0;relativePaths=0;preserveSourceTree=1;copyTextures=1;exportTriangles=0;exportCgfxFileReferences=0;
+			isSampling=1;curveConstrainSampling=0;removeStaticCurves=1;exportPhysics=0;exportConvexMeshGeometries=1;exportPolygonMeshes=1;exportLights=0;
+			exportCameras=0;exportAnimationsOnly=0;exportSeparateFile=0;modelNameDAE=;exportJoints=0;exportSkin=0;exportAnimations=0;exportOptimizedBezierAnimation=0;exportInvisibleNodes=0;exportDefaultCameras=0;
+			exportTexCoords=1;exportNormals=1;exportNormalsPerVertex=1;exportVertexColors=0;exportVertexColorsPerVertex=1;
+			exportTexTangents=0;exportTangents=0;exportReferencedMaterials=0;exportMaterialsOnly=0;
+			exportXRefs=0;dereferenceXRefs=1;exportCameraAsLookat=0;cameraXFov=1;cameraYFov=0;encodedNames=1;doublePrecision=0
+		</comments>
+      <source_data>file:///E:/Projects/TweedeGolf/ToevoegenIconen/Assets/Raam/Modeling/Work/Raam_Modeling_v02.mb</source_data>
+    </contributor>
+    <created>2018-01-29T20:27:34</created>
+    <modified>2018-01-29T20:27:34</modified>
+    <unit name="centimeter" meter="0.01"/>
+    <up_axis>Y_UP</up_axis>
+  </asset>
+  <library_materials>
+    <material id="Raam_mat" name="Raam_mat">
+      <instance_effect url="#Raam_mat-fx"/>
+    </material>
+  </library_materials>
+  <library_effects>
+    <effect id="Raam_mat-fx">
+      <profile_COMMON>
+        <newparam sid="Raam_1-surface">
+          <surface type="2D">
+            <init_from>Raam_1</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="Raam_1-sampler">
+          <sampler2D>
+            <source>Raam_1-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color sid="ambient">0.1354849 0.1354849 0.1354849 1</color>
+            </ambient>
+            <diffuse>
+              <texture texture="Raam_1-sampler" texcoord="TEX0">
+                <extra>
+                  <technique profile="OpenCOLLADAMaya">
+                    <wrapU sid="wrapU" type="bool">1</wrapU>
+                    <wrapV sid="wrapV" type="bool">1</wrapV>
+                    <mirrorU sid="mirrorU" type="bool">0</mirrorU>
+                    <mirrorV sid="mirrorV" type="bool">0</mirrorV>
+                    <coverageU sid="coverageU" type="float">1</coverageU>
+                    <coverageV sid="coverageV" type="float">1</coverageV>
+                    <translateFrameU sid="translateFrameU" type="float">0</translateFrameU>
+                    <translateFrameV sid="translateFrameV" type="float">0</translateFrameV>
+                    <rotateFrame sid="rotateFrame" type="float">0</rotateFrame>
+                    <stagger sid="stagger" type="bool">0</stagger>
+                    <fast sid="fast" type="bool">0</fast>
+                    <repeatU sid="repeatU" type="float">1</repeatU>
+                    <repeatV sid="repeatV" type="float">1</repeatV>
+                    <offsetU sid="offsetU" type="float">0</offsetU>
+                    <offsetV sid="offsetV" type="float">0</offsetV>
+                    <rotateUV sid="rotateUV" type="float">0</rotateUV>
+                    <noiseU sid="noiseU" type="float">0</noiseU>
+                    <noiseV sid="noiseV" type="float">0</noiseV>
+                    <blend_mode sid="blend_mode" type="string">NONE</blend_mode>
+                  </technique>
+                </extra>
+              </texture>
+            </diffuse>
+            <transparent opaque="RGB_ZERO">
+              <color sid="transparent">0 0 0 1</color>
+            </transparent>
+            <transparency>
+              <float>1</float>
+            </transparency>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+      <extra>
+        <technique profile="OpenCOLLADAMaya">
+          <originalMayaNodeId sid="originalMayaNodeId" type="string">Raam_mat</originalMayaNodeId>
+        </technique>
+      </extra>
+    </effect>
+  </library_effects>
+  <library_images>
+    <image id="Raam_1" name="Raam_1">
+      <init_from>Raam-grijs.jpg</init_from>
+      <extra>
+        <technique profile="OpenCOLLADAMaya">
+          <originalMayaNodeId sid="originalMayaNodeId" type="string">Raam_1</originalMayaNodeId>
+          <dgnode_type sid="dgnode_type" type="string">kFile</dgnode_type>
+          <image_sequence sid="image_sequence" type="bool">0</image_sequence>
+        </technique>
+      </extra>
+    </image>
+  </library_images>
+  <library_geometries>
+    <geometry id="Raam_geoShape" name="Raam_geoShape">
+      <mesh>
+        <source id="Raam_geoShape-positions" name="Raam_geoShape-positions">
+          <float_array id="Raam_geoShape-positions-array" count="120">-100 -1.5 0 100 -1.5 0 -100 -1.5 100 100 -1.5 100 -100 1.5 100 100 1.5 100 -100 1.5 0 100 1.5 0 -95.85953 -1.5 4.085726 95.95389 -1.5 4.085726 95.95389 -1.500002 95.91428 -95.85953 -1.500002 95.91428 -95.85953 1.499998 95.91428 95.95389 1.499998 95.91428 95.95389 1.5 4.085726 -95.85953 1.5 4.085726 -96.96964 -1.5 2.918252 96.99437 -1.5 2.918252 96.99437 -1.500001 97.08174 -96.96964 -1.500001 97.08174 -96.97494 1.499999 97.09392 96.99964 1.499999 97.09392 96.99964 1.5 2.906087 -96.97494 1.5 2.906087 -100 -1.624461 0 100 -1.624461 0 96.99437 -1.624461 2.918252 -96.96964 -1.624461 2.918252 100 -1.624458 100 96.99437 -1.624459 97.08175 -100 -1.624458 100 -96.96964 -1.624459 97.08175 -100 1.624458 99.99999 100 1.624458 99.99999 96.99964 1.624457 97.09391 -96.97494 1.624457 97.09391 100 1.624461 0 96.99964 1.624461 2.906075 -100 1.624461 0 -96.97494 1.624461 2.906075</float_array>
+          <technique_common>
+            <accessor source="#Raam_geoShape-positions-array" count="40" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Raam_geoShape-normals" name="Raam_geoShape-normals">
+          <float_array id="Raam_geoShape-normals-array" count="336">0 0 1 0 0 1 0 0 1 0 0 1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 1 0 0 1 0 0 1 0 0 1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 0.9999999 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 0.9999999 0 0 0 -1 0 0 -1 0 0 -1 0 0 -1 1 0 0 1 0 0 1 0 0 1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 0 0 1 0 0 1 0 0 1 0 0 1 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 -0.9999999 0 0 -0.9999999 0 0 -1 0 0 -1 0 0 1 0 0 0.9999999 0 0 0.9999999 0 0 1 0 0 1 0 0 1 0 0 0.9999999 0 0 1 0 0 0 -0.9999999 0 0 -0.9999999 0 0 1 0 0 1 0 0 1 0 0 1 1 0 0 0.9999999 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 0 0 1 0 0 1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 -0.9999999 0 0 -1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 0 0 1 0 0 1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 1 0 0 1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 0 0 -0.9999999 0 0 -0.9999999 0 0 0.9999999 0 0 0.9999999 0 0 0.9999999 0 0 0.9999999 -1 0 0 -1 0 0 1 0 0 1 0 0 1 0 0 1 0 0</float_array>
+          <technique_common>
+            <accessor source="#Raam_geoShape-normals-array" count="112" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Raam_geoShape-map1" name="Raam_geoShape-map1">
+          <float_array id="Raam_geoShape-map1-array" count="140">0.1270956 0.8748162 0.570266 0.8662124 0.6312799 0.8632438 0.1311206 0.936007 0.07280475 0.1201242 0.5671033 0.07309121 0.5657355 0.1307761 0.1331473 0.1205894 0.1864702 0.1736041 0.5124814 0.1818014 0.5039293 0.1902047 0.1950338 0.1823023 0.517338 0.8137867 0.5086116 0.8053991 0.1823894 0.8226391 0.1911028 0.8139285 0.01023078 0.8225754 0.52251 0.9810047 0.5140466 0.9898856 0.001386702 0.8136067 0.680155 0.179511 0.688902 0.1880758 0.1853882 0.01029811 0.1941079 0.001992039 0.134685 0.1215137 0.5641964 0.1316836 0.5140862 0.1809677 0.184864 0.1727687 0.5702056 0.8637791 0.5189471 0.8146169 0.1295987 0.8748056 0.1807823 0.8234769 0.06425014 0.8742926 0.633713 0.8632216 0.6837114 0.8129265 0.01273388 0.822596 0.5671602 0.07069805 0.5186843 0.02051875 0.07030159 0.1201045 0.01796246 0.1709677 0.1345622 0.06052586 0.1853335 0.01269095 0.0154593 0.170948 0.1345063 0.06291813 0.6267935 0.1301879 0.6777225 0.1795343 0.5187414 0.01812588 0.6243612 0.1302112 0.1311814 0.938445 0.1829829 0.9871213 0.1830436 0.9895601 0.5717745 0.9273599 0.5224497 0.9785674 0.6861443 0.8129038 0.5717143 0.9249232 0.06675333 0.8743133 0.1296591 0.8772433 0.5726389 0.8637556 0.1936086 0.2386277 0.2551332 0.1826749 0.006472349 0.1797741 0.4453681 0.1906536 0.5024928 0.2465592 0.5104204 0.009421237 0.5070469 0.7474412 0.4500591 0.8058571 0.6947287 0.804175 0.2512121 0.8143187 0.1895622 0.755998 0.1919394 0.9980081</float_array>
+          <technique_common>
+            <accessor source="#Raam_geoShape-map1-array" count="70" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Raam_geoShape-vertices" name="Raam_geoShape-vertices">
+          <input semantic="POSITION" source="#Raam_geoShape-positions"/>
+        </vertices>
+        <polylist material="lambert2SG" count="40">
+          <input semantic="VERTEX" source="#Raam_geoShape-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Raam_geoShape-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#Raam_geoShape-map1" offset="2" set="0"/>
+          <vcount>4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4</vcount>
+          <p>2 0 56 3 1 1 5 2 54 4 3 3 6 4 43 7 5 5 1 6 6 0 7 7 1 8 6 7 9 47 5 10 2 3 11 57 6 12 4 0 13 7 2 14 0 4 15 55 16 16 8 17 17 9 9 18 10 8 19 11 17 17 9 18 20 12 10 21 13 9 18 10 18 20 12 19 22 14 11 23 15 10 21 13 19 22 14 16 16 8 8 19 11 11 23 15 20 24 50 21 25 17 13 26 18 12 27 69 21 25 53 22 28 20 14 29 21 13 26 66 22 28 46 23 30 22 15 31 23 14 29 63 23 30 42 20 24 16 12 27 19 15 31 60 10 32 13 11 33 15 12 34 68 13 35 64 11 36 15 8 37 11 15 38 59 12 39 67 10 40 13 13 41 65 14 42 61 9 43 10 9 44 10 14 45 62 15 46 58 8 47 11 24 48 24 25 49 25 26 50 26 27 51 27 25 49 25 28 52 28 29 53 29 26 50 26 28 52 28 30 54 30 31 55 31 29 53 29 30 54 30 24 48 24 27 51 27 31 55 31 32 56 48 33 57 51 34 58 52 35 59 49 33 57 33 36 60 44 37 61 45 34 58 34 36 60 36 38 62 40 39 63 41 37 61 37 38 62 38 32 56 32 35 59 35 39 63 39 0 7 7 1 6 6 25 64 25 24 65 24 17 66 9 16 67 8 27 68 27 26 69 26 1 8 6 3 11 57 28 70 28 25 71 25 18 72 12 17 73 9 26 74 26 29 75 29 3 1 1 2 0 56 30 76 30 28 77 28 19 78 14 18 79 12 29 80 29 31 81 31 2 14 0 0 13 7 24 82 24 30 83 30 16 84 8 19 85 14 31 86 31 27 87 27 4 3 3 5 2 54 33 88 51 32 89 48 21 90 17 20 91 50 35 92 49 34 93 52 5 10 2 7 9 47 36 94 44 33 95 33 22 96 20 21 97 53 34 98 34 37 99 45 7 5 5 6 4 43 38 100 40 36 101 36 23 102 22 22 103 46 37 104 37 39 105 41 6 12 4 4 15 55 32 106 32 38 107 38 20 108 16 23 109 42 39 110 39 35 111 35</p>
+        </polylist>
+      </mesh>
+      <extra>
+        <technique profile="OpenCOLLADAMaya">
+          <originalMayaNodeId sid="originalMayaNodeId">Raam_geoShape</originalMayaNodeId>
+          <double_sided sid="double_sided">1</double_sided>
+        </technique>
+      </extra>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="VisualSceneNode" name="Raam_Modeling_v02">
+      <node id="_Raam_geo" name="Raam_geo" type="NODE">
+        <translate sid="translate">0 0 0</translate>
+        <rotate sid="rotateZ">0 0 1 0</rotate>
+        <rotate sid="rotateY">0 1 0 0</rotate>
+        <rotate sid="rotateX">1 0 0 0</rotate>
+        <scale sid="scale">1 1 1</scale>
+        <instance_geometry url="#Raam_geoShape">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="lambert2SG" target="#Raam_mat">
+                <bind_vertex_input semantic="TEX0" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+        <extra>
+          <technique profile="OpenCOLLADAMaya">
+            <originalMayaNodeId sid="originalMayaNodeId" type="string">Raam_geo</originalMayaNodeId>
+          </technique>
+        </extra>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#VisualSceneNode"/>
+  </scene>
+  <extra>
+    <technique profile="COLLADA">
+      <source_data_base_uri>file:///C:/Users/Boris/Documents/maya/projects/default/</source_data_base_uri>
+    </technique>
+  </extra>
+</COLLADA>

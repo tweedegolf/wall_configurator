@@ -1,3 +1,5 @@
+import {Object3D} from 'three';
+
 export interface PaneSettings {
   x:number,
   y:number,
@@ -25,11 +27,25 @@ export interface Block {
   height: number,
 };
 
+export interface ColladaData {
+  name: string,
+  id: string,
+  model: Object3D,
+  width: number,
+  height: number,
+  depth: number,
+  x: number,
+  y: number,
+  z: number,
+};
+
 export interface WallState {
   width: number,
   height: number,
   thickness: number,
   holes: Array<Hole>,
+  colladas: Array<ColladaData>,
+  allColladas: Array<ColladaData>,
 };
 
 export interface AppState {

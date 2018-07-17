@@ -6,8 +6,10 @@ import getStore from './reducers/store';
 import Three from './containers/three';
 import Preview from './containers/preview';
 import Controls from './containers/controls';
+import {loadColladas} from './actions';
 
 const store = getStore();
+store.dispatch(loadColladas());
 
 render(
   <Provider store={store}>

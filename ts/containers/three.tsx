@@ -2,14 +2,15 @@ import React from 'react';
 import * as THREE from 'three';
 import { connect } from 'react-redux';
 import OrbitControls from '../../lib/OrbitControls';
-import {AppState, Block, Hole} from '../interfaces';
+import {AppState, Block, Hole, ColladaData} from '../interfaces';
 import createWall from '../wall/create_wall';
 import {updateGeometry} from '../wall/utils';
 import calculateHoles from '../reducers/calculate_holes';
 
 interface PropsType {
   blocks: Array<Block>,
-  holes:Array<Hole>,
+  holes: Array<Hole>,
+  colladas: Array<ColladaData>,
   width: number,
   height: number,
   thickness: number,
@@ -36,6 +37,7 @@ const mapStateToProps = (state: AppState):PropsType => {
   return {
     blocks,
     holes,
+    colladas: state.wall.colladas,
     width,
     height,
     thickness,
@@ -103,6 +105,9 @@ class Three extends React.Component {
 
   render3D(props?: PropsType) {
     if (props) {
+      props.colladas.forEach(collada => {
+        this.wall.add(collada.model);
+      });
       updateGeometry(this.wall.geometry, props.thickness, props.blocks, props.holes);
       this.wall.position.x = -props.width / 2;
       const repeatX = (props.width / 500) * 3;
