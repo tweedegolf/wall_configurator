@@ -3,14 +3,15 @@ import { WallState, ColladaData, ColladaModel } from '../interfaces';
 import * as Actions from '../actions';
 import {ReduxAction} from '../interfaces';
 
-let globalColladaIndex = 0;
 
 const wallInitialState:WallState = {
   width: 500,
   height: 350,
   thickness: 30,
   colladas: [],
-  colladaModels: [],
+  colladaModels: {},
+  colladaIndex: 0,
+  countPerModel: {},
 };
 
 const getIndexById = (items: Array<ColladaData | ColladaModel>, id:string):number => {
@@ -42,24 +43,26 @@ const wall = (state:WallState = wallInitialState, action:ReduxAction):WallState 
   } else if (action.type === Actions.COLLADAS_LOADED) {
     return {
       ...state,
-      colladaModels: [...action.payload.colladas],
+      colladaModels: {...action.payload.colladas},
     }
   } else if (action.type === Actions.ADD_COLLADA) {
-    const index = getIndexById(state.colladaModels, action.payload.id);
-    if (index !== -1) {
+    const m = state.colladaModels[action.payload.id];
+    if (m) {
       const {
         width,
         height,
         depth,
         model,
         name,
-      } = state.colladaModels[index];
+        id,
+      } = m;
 
       const collada = {
-        index: globalColladaIndex,
-        id: `collada-${globalColladaIndex}`,
+        index: state.colladaIndex,
+        id: `collada-${state.colladaIndex}`,
         model: model.clone(),
-        name,
+        modelId: id,
+        modelName: name,
         width,
         height,
         depth,
@@ -68,10 +71,10 @@ const wall = (state:WallState = wallInitialState, action:ReduxAction):WallState 
         z: state.thickness / 2,
         scale: 1,
       };
-      globalColladaIndex += 1;
 
       return {
         ...state,
+        colladaIndex: state.colladaIndex + 1,
         colladas: [...state.colladas, collada],
       }
     }
@@ -115,12 +118,13 @@ const wall = (state:WallState = wallInitialState, action:ReduxAction):WallState 
     const colladas = [...state.colladas];
     const index = getIndexById(colladas, action.payload.id);
     if (index !== -1) {
+      const target = colladas[index];
+      const model = state.colladaModels[target.modelId];
       const scale = action.payload.scale;
-      const target = colladas[index]
       target.scale = scale;
-      // target.width *= scale;
-      // target.height *= scale;
-      // target.depth *= scale;
+      target.width = model.width * scale;
+      target.height = model.height * scale;
+      target.depth = model.depth * scale;
       colladas[index] = target;
       return {
         ...state,

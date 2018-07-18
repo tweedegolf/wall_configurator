@@ -21,7 +21,7 @@ const ColladasMenu = (props:ColladasMenuProps) => (
     {props.colladas.map((collada) =>
       <ColladaControls
         id={collada.id}
-        name={collada.name}
+        name={collada.modelName}
         x={collada.x}
         y={collada.y}
         z={collada.z}

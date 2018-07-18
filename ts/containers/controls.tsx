@@ -38,12 +38,15 @@ interface PropTypes {
 };
 
 const mapStateToProps = (state:AppState) => {
+  const allModels = state.wall.colladaModels;
+  const models = Object.keys(allModels)
+  .map(key => allModels[key]);
   return {
     width: state.wall.width,
     height: state.wall.height,
     thickness: state.wall.thickness,
     colladas: R.sortBy(R.prop('index'))(state.wall.colladas),
-    colladaModels: state.wall.colladaModels,
+    colladaModels: models,
   };
 };
 

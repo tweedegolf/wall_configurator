@@ -1,4 +1,4 @@
-import {Object3D} from 'three';
+import {Group} from 'three';
 
 export interface PaneSettings {
   x:number,
@@ -21,7 +21,8 @@ export interface Block {
 export interface ColladaModel {
   name: string,
   id: string,
-  model: Object3D,
+  index: number,
+  model: Group,
   width: number,
   height: number,
   depth: number,
@@ -30,8 +31,9 @@ export interface ColladaModel {
 export interface ColladaData {
   id: string,
   index: number,
-  name: string,
-  model: Object3D,
+  model: Group,
+  modelId: string,
+  modelName: string,
   width: number,
   height: number,
   depth: number,
@@ -46,7 +48,9 @@ export interface WallState {
   height: number,
   thickness: number,
   colladas: Array<ColladaData>,
-  colladaModels: Array<ColladaModel>,
+  colladaModels: {[key:string]: ColladaModel},
+  colladaIndex: number,
+  countPerModel: {[key:string]: number},
 };
 
 export interface AppState {

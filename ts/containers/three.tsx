@@ -54,7 +54,7 @@ class Three extends React.Component<PropsTypeExternal & PropsTypeInternal, void>
     this.element = props.element;
     this.scene = new THREE.Scene();
 
-    this.camera = new THREE.PerspectiveCamera(75, 1920/1080, 0.01, 100000);
+    this.camera = new THREE.PerspectiveCamera(75, 1920/1080, 1, 100000);
     this.camera.position.set(0, 1000, 500);
     this.camera.lookAt(new THREE.Vector3(0, 0, 0));
 
@@ -110,7 +110,7 @@ class Three extends React.Component<PropsTypeExternal & PropsTypeInternal, void>
         this.wall.remove(this.wall.children[0]);
       }
       props.colladas.forEach(collada => {
-        // collada.model.scale.set(collada.scale, collada.scale, collada.scale);
+        collada.model.scale.set(collada.scale, collada.scale, collada.scale);
         collada.model.position.x = collada.x + (collada.width / 2);
         collada.model.position.y = collada.y;
         collada.model.position.z = collada.z;
