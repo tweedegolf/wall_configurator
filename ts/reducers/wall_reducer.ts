@@ -57,11 +57,19 @@ const wall = (state:WallState = wallInitialState, action:ReduxAction):WallState 
         id,
       } = m;
 
+      const clone = {...state.countPerModel};
+      if(clone[id] !== undefined) {
+        clone[id] += 1;
+      } else {
+        clone[id] = 1;
+      }
+
       const collada = {
         index: state.colladaIndex,
         id: `collada-${state.colladaIndex}`,
         model: model.clone(),
         modelId: id,
+        // modelName: `${name} #${clone[id]}`,
         modelName: name,
         width,
         height,
@@ -76,13 +84,20 @@ const wall = (state:WallState = wallInitialState, action:ReduxAction):WallState 
         ...state,
         colladaIndex: state.colladaIndex + 1,
         colladas: [...state.colladas, collada],
+        countPerModel: clone,
       }
     }
   } else if (action.type === Actions.REMOVE_COLLADA) {
+    const id = action.payload.id;
     const colladas = [...state.colladas];
+    const clone = {...state.countPerModel};
+    if(clone[id] !== undefined) {
+      clone[id] -= 1;
+    }
     return {
       ...state,
-      colladas: colladas.filter(collada => collada.id !== action.payload.id),
+      colladas: colladas.filter(collada => collada.id !== id),
+      countPerModel: clone,
     }
   } else if (action.type === Actions.UPDATE_COLLADA_X) {
     const colladas = [...state.colladas];

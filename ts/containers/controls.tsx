@@ -1,5 +1,5 @@
 import * as R from 'ramda';
-import React from 'react';
+import React, { SyntheticEvent } from 'react';
 import {connect} from 'react-redux';
 import WallControls from '../components/wall_controls';
 import ColladasMenu from '../components/colladas_menu';
@@ -14,7 +14,7 @@ import {
   updateColladaZ,
   updateColladaScale,
 } from '../actions';
-import {AppState, ColladaData, GenericFunction} from '../interfaces';
+import {AppState, ColladaData, GenericFunction, ColladaModel} from '../interfaces';
 
 interface Controls {
   props:PropTypes
@@ -25,7 +25,7 @@ interface PropTypes {
   height: number,
   thickness: number,
   colladas: Array<ColladaData>
-  colladaModels: Array<ColladaData>
+  colladaModels: Array<ColladaModel>
   updateWallWidth: GenericFunction,
   updateWallHeight: GenericFunction,
   updateWallThickness: GenericFunction,
@@ -45,23 +45,23 @@ const mapStateToProps = (state:AppState) => {
     width: state.wall.width,
     height: state.wall.height,
     thickness: state.wall.thickness,
-    colladas: R.sortBy(R.prop('index'))(state.wall.colladas),
+    colladas: R.reverse(R.sortBy(R.prop('index'))(state.wall.colladas)),
     colladaModels: models,
   };
 };
 
 const mapDispatchToProps = (dispatch:GenericFunction) => {
   return {
-    updateWallWidth: (e) => {
+    updateWallWidth: (e:any) => {
       dispatch(updateWallWidth(e.target.value));
     },
-    updateWallHeight: (e) => {
+    updateWallHeight: (e:any) => {
       dispatch(updateWallHeight(e.target.value));
     },
-    updateWallThickness: (e) => {
+    updateWallThickness: (e:any) => {
       dispatch(updateWallThickness(e.target.value));
     },
-    addCollada: (e) => {
+    addCollada: (e:any) => {
       e.stopPropagation();
       const selected = e.target.selectedIndex;
       const option = e.target.options[selected];
@@ -71,16 +71,16 @@ const mapDispatchToProps = (dispatch:GenericFunction) => {
     removeCollada: (id:string) => {
       dispatch(removeCollada(id));
     },
-    updateColladaX: (id:string, e) => {
+    updateColladaX: (id:string, e:any) => {
       dispatch(updateColladaX(id, e.target.value));
     },
-    updateColladaY: (id:string, e) => {
+    updateColladaY: (id:string, e:any) => {
       dispatch(updateColladaY(id, e.target.value));
     },
-    updateColladaZ: (id:string, e) => {
+    updateColladaZ: (id:string, e:any) => {
       dispatch(updateColladaZ(id, e.target.value));
     },
-    updateColladaScale: (id:string, e) => {
+    updateColladaScale: (id:string, e:any) => {
       dispatch(updateColladaScale(id, e.target.value));
     },
   }

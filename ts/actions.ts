@@ -32,7 +32,7 @@ export const updateWallThickness = (thickness:number) => {
 };
 
 export const COLLADAS_LOADED = 'colladas loaded';
-export const colladasLoaded = (colladas:{id: ColladaModel}) => {
+export const colladasLoaded = (colladas:{[key:string]: ColladaModel}) => {
   return {
     type: COLLADAS_LOADED,
     payload: {

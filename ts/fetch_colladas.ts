@@ -11,20 +11,26 @@ interface ResultType {
 let index = 0;
 
 const colladaUrls:Array<string> = [
-  './colladas/dubbele deur/DubbeleDeur.dae.json',
-  './colladas/dubbele deur/DubbeleDeur-donkerbruin.dae.json',
-  './colladas/dubbele deur/DubbeleDeur-grijs.dae.json',
-  './colladas/dubbele deur/DubbeleDeur-zwart.dae.json',
+  './colladas/DubbeleDeur.dae.json',
+  // './colladas/DubbeleDeur-donkerbruin.dae.json',
+  // './colladas/DubbeleDeur-grijs.dae.json',
+  // './colladas/DubbeleDeur-zwart.dae.json',
 
-  './colladas/enkele deur/EnkeleDeur.dae.json',
-  './colladas/enkele deur/EnkeleDeur-donkerbruin.dae.json',
-  './colladas/enkele deur/EnkeleDeur-grijs.dae.json',
-  './colladas/enkele deur/EnkeleDeur-zwart.dae.json',
+  './colladas/EnkeleDeur.dae.json',
+  // './colladas/EnkeleDeur-donkerbruin.dae.json',
+  // './colladas/EnkeleDeur-grijs.dae.json',
+  // './colladas/EnkeleDeur-zwart.dae.json',
 
-  './colladas/raam/Raam.dae.json',
-  './colladas/raam/Raam100x70.dae.json',
-  './colladas/raam/Raam100x100.dae.json',
-  './colladas/raam/Raam100x200.dae.json',
+  './colladas/EnkeleDeurOpen.dae.json',
+  // './colladas/EnkeleDeurOpen-donkerbruin.dae.json',
+  // './colladas/EnkeleDeurOpen-grijs.dae.json',
+  // './colladas/EnkeleDeurOpen-zwart.dae.json',
+
+  './colladas/Raam.dae.json',
+  './colladas/Raam100x70.dae.json',
+  './colladas/Raam100x100.dae.json',
+  './colladas/Raam100x200.dae.json',
+  './colladas/RaamZijlicht.dae.json',
 ];
 
 const loader = new THREE.ObjectLoader();
