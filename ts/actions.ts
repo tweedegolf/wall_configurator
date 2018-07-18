@@ -1,6 +1,5 @@
-import {Object3D} from 'three';
 import fetchColladas from './fetch_colladas';
-import { ColladaData, GenericFunction } from './interfaces';
+import { GenericFunction, ColladaModel } from './interfaces';
 
 export const UPDATE_WALL_WIDTH = 'update wall width';
 export const updateWallWidth = (width:number) => {
@@ -33,7 +32,7 @@ export const updateWallThickness = (thickness:number) => {
 };
 
 export const COLLADAS_LOADED = 'colladas loaded';
-export const colladasLoaded = (colladas:Array<ColladaData>) => {
+export const colladasLoaded = (colladas:Array<ColladaModel>) => {
   return {
     type: COLLADAS_LOADED,
     payload: {

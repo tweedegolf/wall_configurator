@@ -84,22 +84,22 @@ h2 {
       #controls #wall select option {
         width: 100%;
         min-height: 20px; }
-  #controls #holes {
+  #controls #colladas {
     font-family: monospace;
     margin-top: 0px;
     overflow-y: auto;
     height: calc(100vh - 255px); }
-    #controls #holes .collada {
+    #controls #colladas .collada {
       background-color: #fff;
       width: 210px;
       border: 1px solid #bbb;
       padding: 5px;
       margin: 10px 0 20px 0; }
-      #controls #holes .collada button {
+      #controls #colladas .collada button {
         margin: 0px 0;
         font-family: monospace;
         float: right; }
-    #controls #holes .collada:first-child {
+    #controls #colladas .collada:first-child {
       margin-top: 0; }
 
 #left {

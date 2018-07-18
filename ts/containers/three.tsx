@@ -110,10 +110,10 @@ class Three extends React.Component<PropsTypeExternal & PropsTypeInternal, void>
         this.wall.remove(this.wall.children[0]);
       }
       props.colladas.forEach(collada => {
+        collada.model.scale.set(collada.scale, collada.scale, collada.scale);
         collada.model.position.x = collada.x + (collada.width / 2);
         collada.model.position.y = collada.y;
         collada.model.position.z = collada.z;
-        // collada.model.scale = collada.scale;
         this.wall.add(collada.model);
       });
       updateGeometry(this.wall.geometry, props.thickness, props.blocks, props.colladas);

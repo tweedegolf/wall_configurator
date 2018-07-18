@@ -21,12 +21,14 @@ const ColladasMenu = (props:ColladasMenuProps) => (
     {props.colladas.map((collada) =>
       <ColladaControls
         id={collada.id}
+        name={collada.name}
         x={collada.x}
         y={collada.y}
         z={collada.z}
         scale={collada.scale}
         wallWidth={props.wallWidth}
         wallHeight={props.wallHeight}
+        wallThickness={props.wallThickness}
         removeCollada={props.removeCollada}
         updateColladaX={curry(props.updateColladaX)(collada.id)}
         updateColladaY={curry(props.updateColladaY)(collada.id)}

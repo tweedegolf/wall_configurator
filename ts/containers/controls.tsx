@@ -25,7 +25,7 @@ interface PropTypes {
   height: number,
   thickness: number,
   colladas: Array<ColladaData>
-  allColladas: Array<ColladaData>
+  colladaModels: Array<ColladaData>
   updateWallWidth: GenericFunction,
   updateWallHeight: GenericFunction,
   updateWallThickness: GenericFunction,
@@ -42,9 +42,8 @@ const mapStateToProps = (state:AppState) => {
     width: state.wall.width,
     height: state.wall.height,
     thickness: state.wall.thickness,
-    // holes: R.sortBy(R.prop('index'))(state.wall.holes),
-    colladas: state.wall.colladas,
-    allColladas: state.wall.allColladas,
+    colladas: R.sortBy(R.prop('index'))(state.wall.colladas),
+    colladaModels: state.wall.colladaModels,
   };
 };
 
@@ -98,7 +97,7 @@ class Controls extends React.Component {
           width={this.props.width}
           height={this.props.height}
           thickness={this.props.thickness}
-          allColladas={this.props.allColladas}
+          colladaModels={this.props.colladaModels}
           updateWallWidth={this.props.updateWallWidth}
           updateWallHeight={this.props.updateWallHeight}
           updateWallThickness={this.props.updateWallThickness}
@@ -106,17 +105,19 @@ class Controls extends React.Component {
           />
       </div>
       <h2>Colladas</h2>
-      <ColladasMenu
-        colladas={this.props.colladas}
-        removeCollada={this.props.removeCollada}
-        updateColladaX={this.props.updateColladaX}
-        updateColladaY={this.props.updateColladaY}
-        updateColladaZ={this.props.updateColladaZ}
-        updateColladaScale={this.props.updateColladaScale}
-        wallWidth={this.props.width}
-        wallHeight={this.props.height}
-        wallThickness={this.props.thickness}
-      />
+      <div id="colladas">
+        <ColladasMenu
+          colladas={this.props.colladas}
+          removeCollada={this.props.removeCollada}
+          updateColladaX={this.props.updateColladaX}
+          updateColladaY={this.props.updateColladaY}
+          updateColladaZ={this.props.updateColladaZ}
+          updateColladaScale={this.props.updateColladaScale}
+          wallWidth={this.props.width}
+          wallHeight={this.props.height}
+          wallThickness={this.props.thickness}
+        />
+      </div>
     </div>);
   }
 }

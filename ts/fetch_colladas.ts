@@ -1,7 +1,9 @@
 // Loads windows and doors in JSON formats
 
 import * as THREE from 'three';
-import { ColladaData } from './interfaces';
+import { ColladaModel } from './interfaces';
+
+let index = 0;
 
 const colladaUrls:Array<string> = [
   './colladas/dubbele deur/DubbeleDeur.dae.json',
@@ -40,7 +42,7 @@ const loadCollada = (url:string) => {
 async function fetchColladas() {
   const promises = colladaUrls.map(c => loadCollada(c));
   const results = await Promise.all(promises);
-  const colladas:Array<ColladaData> = [];
+  const colladas:Array<ColladaModel> = [];
   results.forEach(result => {
     if (result !== null) {
       const model = result.model;
@@ -48,16 +50,12 @@ async function fetchColladas() {
       const b = new THREE.Box3();
       b.setFromObject(model);
       colladas.push({
-        id: `collada-${Date.now()}`,
+        id: `collada-model-${index++}`,
         name: result.name,
         model,
         width: Math.round(-b.min.x + b.max.x),
         height: Math.round(-b.min.y + b.max.y),
         depth: Math.round(-b.min.z + b.max.z),
-        scale: 1,
-        x: 0,
-        y: 0,
-        z: 0,
       });
     }
   });

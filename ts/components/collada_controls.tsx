@@ -7,6 +7,7 @@ interface ColladaControlsProps {
   x: number,
   y: number,
   z: number,
+  name: string,
   scale: number,
   wallWidth: number,
   wallHeight: number,
@@ -21,7 +22,7 @@ interface ColladaControlsProps {
 const ColladaControls = (props:ColladaControlsProps) => (
   <div className="collada" id={props.id}>
     <button onClick={(e) => props.removeCollada(props.id)}>X</button>
-    {/* <div>{props.id}</div> */}
+    <div>{props.name}</div>
     <Slider
       min={0}
       max={props.wallWidth}
@@ -46,6 +47,7 @@ const ColladaControls = (props:ColladaControlsProps) => (
     <Slider
       min={0}
       max={4}
+      step={0.1}
       label="scale"
       value={props.scale}
       onChange={props.updateColladaScale}

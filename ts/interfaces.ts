@@ -18,9 +18,19 @@ export interface Block {
   height: number,
 };
 
-export interface ColladaData {
+export interface ColladaModel {
   name: string,
   id: string,
+  model: Object3D,
+  width: number,
+  height: number,
+  depth: number,
+};
+
+export interface ColladaData {
+  id: string,
+  index: number,
+  name: string,
   model: Object3D,
   width: number,
   height: number,
@@ -36,7 +46,7 @@ export interface WallState {
   height: number,
   thickness: number,
   colladas: Array<ColladaData>,
-  allColladas: Array<ColladaData>,
+  colladaModels: Array<ColladaModel>,
 };
 
 export interface AppState {
