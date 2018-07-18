@@ -1,3 +1,3 @@
 ### Wall Configurator
 
-[Live demo](https://tweedegolf.github.io/wall_configurator/build/)
+[Live demo](https://tweedegolf.github.io/wall_configurator/app/)
