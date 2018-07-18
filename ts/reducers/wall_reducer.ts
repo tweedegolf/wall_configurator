@@ -5,7 +5,7 @@ import {ReduxAction} from '../interfaces';
 
 
 const wallInitialState:WallState = {
-  width: 500,
+  width: 825,
   height: 350,
   thickness: 30,
   colladas: [],
