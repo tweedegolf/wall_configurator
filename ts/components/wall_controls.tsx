@@ -31,7 +31,7 @@ const WallControls = (props:WallControlsProps) => (
     />
     <Slider
       min={10}
-      max={3000}
+      max={250}
       label="thickness"
       value={props.thickness}
       onChange={props.updateWallThickness}
