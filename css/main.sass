@@ -32,7 +32,7 @@ h2
     font-weight: 800
 
   #wall
-    height: 210px
+    height: auto
     border: 1px solid #bbb
     padding: 5px
     width: 210px
@@ -42,12 +42,16 @@ h2
       margin: 15px 0
       font-family: monospace
       width: 100%
-      text-align: left;
+      text-align: left
 
-    select, option
-      width: 100%
-      min-height: 20px
+    select
+      margin: 10px 0
       font-family: monospace
+      // font-size: 15px
+
+      option
+        width: 100%
+        min-height: 20px
 
   #holes
     font-family: monospace
@@ -55,7 +59,7 @@ h2
     overflow-y: auto
     height: calc(100vh - 255px)
 
-    .hole
+    .collada
       background-color: #fff
       width: 210px
       border: 1px solid #bbb
@@ -67,7 +71,7 @@ h2
         font-family: monospace
         float: right
 
-    .hole:first-child
+    .collada:first-child
       margin-top: 0
 
 #left
@@ -76,19 +80,10 @@ h2
   overflow: none
   float: left
 
-  #view2D
-    float: left
-    height: 35vh
-    width: 100%
-    // background-color: #fff
-    // background-color: rgba(255, 0, 0, 0.3)
-
   #view3D
     float: left
-    height: 65vh
+    height: 100vh
     width: 100%
-    border-top: 1px solid #ccc
-
 
 #right
   width: 240px

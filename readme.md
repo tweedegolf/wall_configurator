@@ -1,3 +1,3 @@
-### custom geo
+### Wall Configurator
 
-[Live demo](https://tweedegolf.github.io/custom_geo/build/)
+[Live demo](https://tweedegolf.github.io/wall_configurator/build/)

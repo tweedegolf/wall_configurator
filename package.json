@@ -27,7 +27,7 @@
   },
   "scripts": {
     "server": "python -m SimpleHTTPServer 1234",
-    "build": "parcel build index.html -d build --public-url ./",
+    "build": "parcel build index.html -d app --public-url ./",
     "watch": "parcel index.html -d app/"
   },
   "name": "custom_geo",

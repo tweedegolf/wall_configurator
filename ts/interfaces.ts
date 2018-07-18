@@ -9,15 +9,6 @@ export interface PaneSettings {
   depth:number,
 };
 
-export interface Hole {
-  id: string,
-  index: number,
-  x: number,
-  y: number,
-  width: number,
-  height: number,
-};
-
 export interface Block {
   x: number,
   x2: number,
@@ -34,6 +25,7 @@ export interface ColladaData {
   width: number,
   height: number,
   depth: number,
+  scale: number,
   x: number,
   y: number,
   z: number,
@@ -43,7 +35,6 @@ export interface WallState {
   width: number,
   height: number,
   thickness: number,
-  holes: Array<Hole>,
   colladas: Array<ColladaData>,
   allColladas: Array<ColladaData>,
 };
@@ -61,4 +52,8 @@ export interface ReduxAction {
   payload: {
     [key:string]: any,
   },
+}
+
+export interface GenericFunction {
+  (...a:Array<any>): any
 }

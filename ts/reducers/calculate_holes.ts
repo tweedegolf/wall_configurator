@@ -31,7 +31,7 @@ export default createSelector(
       width,
       height,
       thickness,
-      holes,
+      colladas: holes,
     } = wallState;
 
     holes.sort(sortOnX);
@@ -83,7 +83,7 @@ export default createSelector(
     });
 
     return {
-      holes,
+      colladas: holes,
       blocks,
       width,
       height,

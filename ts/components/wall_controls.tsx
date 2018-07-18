@@ -7,7 +7,7 @@ interface WallControlsProps {
   height: number,
   thickness: number,
   allColladas: Array<ColladaData>
-  addHole: (...a:Array<any>) => any,
+  addCollada: (...a:Array<any>) => any,
   updateWallWidth: (...a:Array<any>) => any,
   updateWallHeight: (...a:Array<any>) => any,
   updateWallThickness: (...a:Array<any>) => any,
@@ -36,10 +36,7 @@ const WallControls = (props:WallControlsProps) => (
       value={props.thickness}
       onChange={props.updateWallThickness}
     />
-    <button
-      onClick={props.addHole}
-    >add hole</button>
-    <select>
+    <select onChange={props.addCollada}>
       <option key="select-collada" id="select-collada">add collada</option>
       {props.allColladas.map(collada =>
         <option key={collada.id} id={collada.id}>{collada.name.toLowerCase()}</option>

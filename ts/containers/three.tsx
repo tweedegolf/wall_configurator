@@ -2,19 +2,21 @@ import React from 'react';
 import * as THREE from 'three';
 import { connect } from 'react-redux';
 import OrbitControls from '../../lib/OrbitControls';
-import {AppState, Block, Hole, ColladaData} from '../interfaces';
+import {AppState, Block, ColladaData} from '../interfaces';
 import createWall from '../wall/create_wall';
 import {updateGeometry} from '../wall/utils';
 import calculateHoles from '../reducers/calculate_holes';
 
-interface PropsType {
+interface PropsTypeInternal {
   blocks: Array<Block>,
-  holes: Array<Hole>,
   colladas: Array<ColladaData>,
   width: number,
   height: number,
   thickness: number,
-  // element?: HTMLElement
+};
+
+interface PropsTypeExternal {
+  element: HTMLDivElement
 };
 
 interface Three {
@@ -26,29 +28,28 @@ interface Three {
   boundResize: (e:Event) => void
 }
 
-const mapStateToProps = (state: AppState):PropsType => {
+const mapStateToProps = (state: AppState):PropsTypeInternal => {
   const {
     blocks,
-    holes,
+    colladas,
     width,
     height,
     thickness,
   } = calculateHoles(state);
   return {
     blocks,
-    holes,
-    colladas: state.wall.colladas,
+    colladas,
     width,
     height,
     thickness,
   }
 }
 
-class Three extends React.Component {
+class Three extends React.Component<PropsTypeExternal & PropsTypeInternal, void> {
   static defaultProps = {
   }
 
-  constructor(props) {
+  constructor(props:PropsTypeExternal & PropsTypeInternal) {
     super(props);
     this.element = props.element;
     this.scene = new THREE.Scene();
@@ -103,12 +104,19 @@ class Three extends React.Component {
     this.render3D();
   }
 
-  render3D(props?: PropsType) {
+  render3D(props?:PropsTypeInternal):void {
     if (props) {
+      while (this.wall.children.length){
+        this.wall.remove(this.wall.children[0]);
+      }
       props.colladas.forEach(collada => {
+        collada.model.position.x = collada.x + (collada.width / 2);
+        collada.model.position.y = collada.y;
+        collada.model.position.z = collada.z;
+        // collada.model.scale = collada.scale;
         this.wall.add(collada.model);
       });
-      updateGeometry(this.wall.geometry, props.thickness, props.blocks, props.holes);
+      updateGeometry(this.wall.geometry, props.thickness, props.blocks, props.colladas);
       this.wall.position.x = -props.width / 2;
       const repeatX = (props.width / 500) * 3;
       const repeatY = (props.height / 350) * 3;

@@ -54,6 +54,7 @@ async function fetchColladas() {
         width: Math.round(-b.min.x + b.max.x),
         height: Math.round(-b.min.y + b.max.y),
         depth: Math.round(-b.min.z + b.max.z),
+        scale: 1,
         x: 0,
         y: 0,
         z: 0,
